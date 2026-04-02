@@ -59,18 +59,18 @@ $stmt = $pdo->prepare("SELECT * FROM products p WHERE $whereClause ORDER BY $ord
 $stmt->execute($params);
 $products = $stmt->fetchAll();
 
-// Get brands for sidebar (hardcoded order with logos from uploads/brands/)
+// Get brands for sidebar (hardcoded order with logos from images/brands/)
 $brands = [
-    ['brand' => 'Beardo',                  'brand_logo' => 'uploads/brands/beardo.png'],
-    ['brand' => 'Ustraa',                  'brand_logo' => 'uploads/brands/ustraa.png'],
-    ['brand' => "L'Oréal Professionnel",   'brand_logo' => 'uploads/brands/loreal-professionnel.png'],
-    ['brand' => 'Kérastase',               'brand_logo' => 'uploads/brands/kerastase.png'],
-    ['brand' => 'Olaplex',                 'brand_logo' => 'uploads/brands/olaplex.png'],
-    ['brand' => 'Minimalist',              'brand_logo' => 'uploads/brands/minimalist.png'],
-    ['brand' => 'Arata',                   'brand_logo' => 'uploads/brands/arata.png'],
-    ['brand' => 'Garnier',                 'brand_logo' => 'uploads/brands/garnier.png'],
-    ['brand' => 'The Man Company',         'brand_logo' => 'uploads/brands/the-man-company.png'],
-    ['brand' => 'Plum Goodness',           'brand_logo' => 'uploads/brands/plum.png'],
+    ['brand' => 'Beardo',                  'brand_logo' => 'images/brands/beardo.png'],
+    ['brand' => 'Ustraa',                  'brand_logo' => 'images/brands/ustraa.png'],
+    ['brand' => "L'Oréal Professionnel",   'brand_logo' => 'images/brands/loreal-professionnel.png'],
+    ['brand' => 'Kérastase',               'brand_logo' => 'images/brands/kerastase.png'],
+    ['brand' => 'Olaplex',                 'brand_logo' => 'images/brands/olaplex.png'],
+    ['brand' => 'Minimalist',              'brand_logo' => 'images/brands/minimalist.png'],
+    ['brand' => 'Arata',                   'brand_logo' => 'images/brands/arata.png'],
+    ['brand' => 'Garnier',                 'brand_logo' => 'images/brands/garnier.png'],
+    ['brand' => 'The Man Company',         'brand_logo' => 'images/brands/the-man-company.png'],
+    ['brand' => 'Plum Goodness',           'brand_logo' => 'images/brands/plum.png'],
 ];
 
 // Get Recommendations (Only show if no active filters/searches are applied)
@@ -155,7 +155,7 @@ require_once '../partials/header.php';
                     </span>
 
                     <a href="product-details.php?id=<?= $product['id'] ?>" class="block h-[180px] bg-slate-50 rounded-2xl flex items-center justify-center mb-5">
-                        <img src="<?= SITE_URL ?>/assets/images/<?= $product['image'] ?>" alt="<?= sanitize($product['name']) ?>" class="max-h-[160px] object-contain group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/300x200?text=<?= urlencode($product['name']) ?>'">
+                        <img src="<?= SITE_URL ?>/images/<?= $product['image'] ?>" alt="<?= sanitize($product['name']) ?>" class="max-h-[160px] object-contain group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/300x200?text=<?= urlencode($product['name']) ?>'">
                     </a>
 
                     <div class="flex-1 flex flex-col">
@@ -285,7 +285,7 @@ require_once '../partials/header.php';
 
                     <!-- Product Image -->
                     <a href="product-details.php?id=<?= $product['id'] ?>" class="block h-[180px] bg-slate-50 rounded-2xl flex items-center justify-center mb-5">
-                        <img src="<?= SITE_URL ?>/assets/images/<?= $product['image'] ?>" alt="<?= sanitize($product['name']) ?>" class="max-h-[160px] object-contain group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/300x200?text=<?= urlencode($product['name']) ?>'">
+                        <img src="<?= SITE_URL ?>/images/<?= $product['image'] ?>" alt="<?= sanitize($product['name']) ?>" class="max-h-[160px] object-contain group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/300x200?text=<?= urlencode($product['name']) ?>'">
                     </a>
 
                     <!-- Product Info -->
@@ -326,3 +326,4 @@ require_once '../partials/header.php';
 </div>
 
 <?php require_once '../partials/footer.php'; ?>
+

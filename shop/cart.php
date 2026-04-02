@@ -52,7 +52,7 @@ require_once '../partials/header.php';
                 <div class="bg-white rounded-xl shadow-card border border-gray-100 p-4 flex items-center gap-4">
                     <!-- Image -->
                     <div class="w-16 h-16 rounded-lg bg-gray-100 flex-shrink-0 overflow-hidden">
-                        <img src="<?= SITE_URL ?>/assets/images/<?= $item['image'] ?>" alt="" class="w-full h-full object-contain p-1" onerror="this.src='https://via.placeholder.com/64'">
+                        <img src="<?= SITE_URL ?>/images/<?= $item['image'] ?>" alt="" class="w-full h-full object-contain p-1" onerror="this.src='https://via.placeholder.com/64'">
                     </div>
                     
                     <!-- Info -->
@@ -130,3 +130,4 @@ require_once '../partials/header.php';
 </div>
 
 <?php require_once '../partials/footer.php'; ?>
+

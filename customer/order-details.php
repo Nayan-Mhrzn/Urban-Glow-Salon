@@ -102,7 +102,7 @@ require_once '../partials/header.php';
                 <?php foreach ($items as $item): ?>
                 <div class="p-6 sm:px-8 flex items-center gap-6 hover:bg-[#EEF0FF] transition-colors group">
                     <div class="w-20 h-20 bg-white rounded-xl border border-gray-200 flex items-center justify-center p-2 flex-shrink-0 shadow-sm group-hover:border-primary/30 transition-colors">
-                        <img src="<?= SITE_URL ?>/assets/images/<?= sanitize($item['image']) ?>" alt="<?= sanitize($item['name']) ?>" class="max-w-full max-h-full object-contain" onerror="this.src='https://via.placeholder.com/80'">
+                        <img src="<?= SITE_URL ?>/images/<?= sanitize($item['image']) ?>" alt="<?= sanitize($item['name']) ?>" class="max-w-full max-h-full object-contain" onerror="this.src='https://via.placeholder.com/80'">
                     </div>
                     
                     <div class="flex-1">
@@ -131,3 +131,4 @@ require_once '../partials/header.php';
 </div>
 
 <?php require_once '../partials/footer.php'; ?>
+

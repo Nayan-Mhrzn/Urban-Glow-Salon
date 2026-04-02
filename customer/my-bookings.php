@@ -51,7 +51,7 @@ require_once '../partials/header.php';
                             <!-- Left: Image Block -->
                             <div class="w-full md:w-[180px] h-[140px] bg-[#f8fafc] rounded-xl flex items-center justify-center flex-shrink-0 relative overflow-hidden">
                                 <?php if ($booking['service_image']): ?>
-                                    <img src="<?= SITE_URL ?>/assets/images/<?= sanitize($booking['service_image']) ?>" alt="Service" class="w-full h-full object-cover">
+                                    <img src="<?= SITE_URL ?>/images/<?= sanitize($booking['service_image']) ?>" alt="Service" class="w-full h-full object-cover">
                                 <?php else: ?>
                                     <i class="fas fa-cut text-4xl text-gray-300"></i>
                                 <?php endif; ?>
@@ -125,3 +125,4 @@ require_once '../partials/header.php';
 </div>
 
 <?php require_once '../partials/footer.php'; ?>
+

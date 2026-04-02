@@ -63,7 +63,7 @@ require_once '../partials/header.php';
                     <div class="bg-white rounded-[24px] flex items-center justify-center p-10 h-[500px] w-full relative mb-8">
                         <!-- Simulated Carousel controls -->
                         <button class="absolute -left-6 w-12 h-12 bg-white rounded-full shadow-[0_4px_15px_rgb(0,0,0,0.05)] border border-gray-50 flex items-center justify-center text-[#111827] hover:text-primary transition-colors"><i class="fas fa-chevron-left text-[16px]"></i></button>
-                        <img src="<?= SITE_URL ?>/assets/images/<?= $product['image'] ?>" alt="<?= sanitize($product['name']) ?>" class="max-h-[420px] object-contain drop-shadow-2xl" id="mainImage" onerror="this.src='https://via.placeholder.com/400x300?text=<?= urlencode($product['name']) ?>'">
+                        <img src="<?= SITE_URL ?>/images/<?= $product['image'] ?>" alt="<?= sanitize($product['name']) ?>" class="max-h-[420px] object-contain drop-shadow-2xl" id="mainImage" onerror="this.src='https://via.placeholder.com/400x300?text=<?= urlencode($product['name']) ?>'">
                         <button class="absolute -right-6 w-12 h-12 bg-white rounded-full shadow-[0_4px_15px_rgb(0,0,0,0.05)] border border-gray-50 flex items-center justify-center text-[#111827] hover:text-primary transition-colors"><i class="fas fa-chevron-right text-[16px]"></i></button>
                     </div>
 
@@ -72,8 +72,8 @@ require_once '../partials/header.php';
                     <div class="flex gap-4 mb-8 overflow-x-auto pb-2 justify-center w-full">
                         <?php foreach ($images as $index => $img): ?>
                         <div class="w-[84px] h-[84px] flex-shrink-0 rounded-[14px] bg-black border-2 <?= $index === 0 ? 'border-[#3b5ae6]' : 'border-transparent hover:border-gray-200' ?> cursor-pointer transition-all overflow-hidden relative thumbnail-btn" 
-                             onclick="document.getElementById('mainImage').src='<?= SITE_URL ?>/assets/images/<?= $img['image_url'] ?>'; document.querySelectorAll('.thumbnail-btn').forEach(b => { b.classList.remove('border-[#3b5ae6]'); b.classList.add('border-transparent'); }); this.classList.remove('border-transparent'); this.classList.add('border-[#3b5ae6]');">
-                            <img src="<?= SITE_URL ?>/assets/images/<?= $img['image_url'] ?>" alt="" class="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity">
+                             onclick="document.getElementById('mainImage').src='<?= SITE_URL ?>/images/<?= $img['image_url'] ?>'; document.querySelectorAll('.thumbnail-btn').forEach(b => { b.classList.remove('border-[#3b5ae6]'); b.classList.add('border-transparent'); }); this.classList.remove('border-transparent'); this.classList.add('border-[#3b5ae6]');">
+                            <img src="<?= SITE_URL ?>/images/<?= $img['image_url'] ?>" alt="" class="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity">
                         </div>
                         <?php endforeach; ?>
                     </div>
@@ -107,7 +107,7 @@ require_once '../partials/header.php';
                             <div class="flex items-center gap-3">
                                 <?php if ($product['brand_logo']): ?>
                                 <div class="w-8 h-8 bg-[#111] rounded-full flex items-center justify-center p-1.5 overflow-hidden">
-                                     <img src="<?= SITE_URL ?>/assets/images/<?= $product['brand_logo'] ?>" class="w-full h-full object-contain filter invert bg-white">
+                                     <img src="<?= SITE_URL ?>/images/<?= $product['brand_logo'] ?>" class="w-full h-full object-contain filter invert bg-white">
                                 </div>
                                 <?php endif; ?>
                                 <span class="text-[17px] font-bold text-[#1f2937]"><?= sanitize($product['brand']) ?></span>
@@ -176,7 +176,7 @@ require_once '../partials/header.php';
             <?php foreach ($relatedProducts as $rp): ?>
             <a href="product-details.php?id=<?= $rp['id'] ?>" class="bg-white rounded-[20px] p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
                 <div class="h-44 bg-transparent flex items-center justify-center mb-5">
-                    <img src="<?= SITE_URL ?>/assets/images/<?= $rp['image'] ?>" alt="<?= sanitize($rp['name']) ?>" class="max-h-full object-contain" onerror="this.src='https://via.placeholder.com/200?text=<?= urlencode($rp['name']) ?>'">
+                    <img src="<?= SITE_URL ?>/images/<?= $rp['image'] ?>" alt="<?= sanitize($rp['name']) ?>" class="max-h-full object-contain" onerror="this.src='https://via.placeholder.com/200?text=<?= urlencode($rp['name']) ?>'">
                 </div>
                 <div>
                     <h3 class="font-bold text-[16px] text-[#111827] truncate mb-1.5"><?= sanitize($rp['name']) ?></h3>
@@ -190,3 +190,4 @@ require_once '../partials/header.php';
 </div>
 
 <?php require_once '../partials/footer.php'; ?>
+

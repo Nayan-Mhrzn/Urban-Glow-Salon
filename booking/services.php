@@ -87,7 +87,7 @@ require_once '../partials/header.php';
 
                 <!-- Service Image -->
                 <div class="h-48 bg-gray-100 overflow-hidden">
-                    <img src="<?= SITE_URL ?>/assets/images/<?= $service['image'] ?>" alt="<?= sanitize($service['name']) ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/400x200?text=<?= urlencode($service['name']) ?>'">
+                    <img src="<?= SITE_URL ?>/images/<?= $service['image'] ?>" alt="<?= sanitize($service['name']) ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/400x200?text=<?= urlencode($service['name']) ?>'">
                 </div>
 
                 <!-- Service Info -->
@@ -119,3 +119,4 @@ require_once '../partials/header.php';
 </div>
 
 <?php require_once '../partials/footer.php'; ?>
+

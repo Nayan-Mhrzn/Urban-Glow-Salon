@@ -17,7 +17,9 @@ header('Referrer-Policy: strict-origin-when-cross-origin');
 // Site settings
 define('SITE_NAME', 'Urban Glow Salon');
 define('SITE_TAGLINE', 'Premium Grooming For All');
-define('SITE_URL', 'https://nayanmaharjan.com.np');
+$isLocalhost = in_array($_SERVER['HTTP_HOST'] ?? '', ['localhost', '127.0.0.1', '::1']);
+$siteUrl = $isLocalhost ? 'http://localhost/Urban%20Glow%20Salon' : 'https://nayanmaharjan.com.np';
+define('SITE_URL', $siteUrl);
 define('SITE_ROOT', dirname(__DIR__));
 
 // Directory paths

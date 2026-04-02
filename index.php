@@ -58,7 +58,7 @@ require_once 'partials/header.php';
         <!-- Hero Image -->
         <div class="flex-1 flex justify-center">
             <div class="animate-gentle-bounce w-[272px] h-[272px] md:w-[408px] md:h-[408px] lg:w-[510px] lg:h-[510px] rounded-full bg-white shadow-[0_0_0_20px_rgba(255,255,255,0.5),0_0_0_40px_rgba(255,255,255,0.3),0_40px_80px_-10px_rgba(0,0,0,0.3)] flex items-center justify-center overflow-hidden">
-                <img src="<?= SITE_URL ?>/uploads/1/barbershop%20full%20of%20clients-rafiki.svg" alt="Urban Glow Salon" class="w-[85%] h-[85%] object-contain">
+                <img src="<?= SITE_URL ?>/images/1/barbershop%20full%20of%20clients-rafiki.svg" alt="Urban Glow Salon" class="w-[85%] h-[85%] object-contain">
             </div>
         </div>
     </div>
@@ -86,7 +86,7 @@ require_once 'partials/header.php';
 
                 <!-- Product Image -->
                 <div class="h-52 bg-gray-50 flex items-center justify-center p-6 overflow-hidden">
-                    <img src="<?= SITE_URL ?>/assets/images/<?= $product['image'] ?>" alt="<?= sanitize($product['name']) ?>" class="max-h-full object-contain group-hover:scale-110 transition-transform duration-500">
+                    <img src="<?= SITE_URL ?>/images/<?= $product['image'] ?>" alt="<?= sanitize($product['name']) ?>" class="max-h-full object-contain group-hover:scale-110 transition-transform duration-500">
                 </div>
 
                 <!-- Product Info -->
@@ -149,7 +149,7 @@ require_once 'partials/header.php';
 
                 <!-- Service Image -->
                 <div class="h-48 bg-gray-100 overflow-hidden">
-                    <img src="<?= SITE_URL ?>/assets/images/<?= $service['image'] ?>" alt="<?= sanitize($service['name']) ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/400x200?text=<?= urlencode($service['name']) ?>'">
+                    <img src="<?= SITE_URL ?>/images/<?= $service['image'] ?>" alt="<?= sanitize($service['name']) ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/400x200?text=<?= urlencode($service['name']) ?>'">
                 </div>
 
                 <!-- Service Info -->
@@ -291,3 +291,5 @@ require_once 'partials/header.php';
 </section>
 
 <?php require_once 'partials/footer.php'; ?>
+
+

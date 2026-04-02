@@ -249,7 +249,7 @@ require_once '../partials/header.php';
                                 <div class="flex items-center gap-4 p-4 rounded-xl border border-gray-100 hover:border-primary/30 hover:shadow-sm transition-all bg-white group">
                                     <div class="w-16 h-16 bg-gray-50 rounded-lg flex items-center justify-center p-2 border border-gray-100 flex-shrink-0">
                                         <?php if ($order['first_product_image']): ?>
-                                            <img src="<?= SITE_URL ?>/assets/images/<?= sanitize($order['first_product_image']) ?>" class="w-full h-full object-contain" alt="Product" onerror="this.src='https://via.placeholder.com/60?text=Order'">
+                                            <img src="<?= SITE_URL ?>/images/<?= sanitize($order['first_product_image']) ?>" class="w-full h-full object-contain" alt="Product" onerror="this.src='https://via.placeholder.com/60?text=Order'">
                                         <?php else: ?>
                                             <i class="fas fa-box text-gray-300 text-2xl"></i>
                                         <?php endif; ?>
@@ -310,7 +310,7 @@ require_once '../partials/header.php';
                                     <div class="flex gap-4">
                                         <div class="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center flex-shrink-0 border border-gray-100">
                                             <?php if ($review['target_image']): ?>
-                                                <img src="<?= SITE_URL ?>/assets/images/<?= sanitize($review['target_image']) ?>" class="w-10 h-10 object-contain rounded" alt="Item">
+                                                <img src="<?= SITE_URL ?>/images/<?= sanitize($review['target_image']) ?>" class="w-10 h-10 object-contain rounded" alt="Item">
                                             <?php else: ?>
                                                 <i class="fas <?= $review['review_type'] === 'Product' ? 'fa-box' : 'fa-spa' ?> text-gray-400"></i>
                                             <?php endif; ?>
@@ -470,3 +470,4 @@ if (settingsBtn && settingsDrop) {
 </script>
 
 <?php require_once '../partials/footer.php'; ?>
+

@@ -123,7 +123,7 @@ require_once '../partials/header.php';
                     ?>
                     <div class="flex items-center gap-3 text-sm">
                         <div class="w-10 h-10 bg-gray-100 rounded-lg flex-shrink-0 overflow-hidden">
-                            <img src="<?= SITE_URL ?>/assets/images/<?= $item['image'] ?>" alt="" class="w-full h-full object-contain p-0.5" onerror="this.src='https://via.placeholder.com/40'">
+                            <img src="<?= SITE_URL ?>/images/<?= $item['image'] ?>" alt="" class="w-full h-full object-contain p-0.5" onerror="this.src='https://via.placeholder.com/40'">
                         </div>
                         <span class="flex-1 truncate text-gray-700"><?= sanitize($item['name']) ?> × <?= $item['quantity'] ?></span>
                         <span class="font-medium"><?= formatPrice($price * $item['quantity']) ?></span>
@@ -152,3 +152,4 @@ require_once '../partials/header.php';
 </div>
 
 <?php require_once '../partials/footer.php'; ?>
+

@@ -58,7 +58,7 @@ if (isLoggedIn()) {
         
         <!-- Illustration -->
         <div class="pt-8 px-6 pb-4 flex justify-center w-full">
-            <img src="<?= SITE_URL ?>/uploads/2/barbershop%20team-pana.svg" alt="Urban Glow Salon Team" class="w-full max-w-[320px] h-auto object-contain pointer-events-none animate-gentle-bounce">
+            <img src="<?= SITE_URL ?>/images/2/barbershop%20team-pana.svg" alt="Urban Glow Salon Team" class="w-full max-w-[320px] h-auto object-contain pointer-events-none animate-gentle-bounce">
         </div>
 
         <!-- Form Body -->
@@ -302,3 +302,4 @@ if (isLoggedIn()) {
     </style>
 </body>
 </html>
+

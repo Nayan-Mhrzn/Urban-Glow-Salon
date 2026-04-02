@@ -6,7 +6,7 @@ $pageTitle = 'Manage Products';
 require_once dirname(__DIR__) . '/includes/config.php';
 
 // Ensure upload directory exists
-$uploadDir = SITE_ROOT . '/uploads/products/';
+$uploadDir = SITE_ROOT . '/images/products/';
 if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
 
 // Handle actions
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $ext = pathinfo($_FILES['product_image']['name'], PATHINFO_EXTENSION);
                 $imageName = 'product_' . time() . '_' . rand(1000, 9999) . '.' . $ext;
                 move_uploaded_file($_FILES['product_image']['tmp_name'], $uploadDir . $imageName);
-                $imageName = 'uploads/products/' . $imageName;
+                $imageName = 'images/products/' . $imageName;
             }
         }
 
@@ -132,7 +132,7 @@ require_once 'header.php';
                     <label class="block text-xs font-medium text-gray-600 mb-1">Product Image</label>
                     <?php if ($editProduct && $editProduct['image']): ?>
                     <div class="mb-2 flex items-center gap-3">
-                        <img src="<?= SITE_URL ?>/assets/images/<?= $editProduct['image'] ?>" alt="Current" class="w-16 h-16 rounded-lg object-cover border border-gray-200" onerror="this.src='<?= SITE_URL ?>/<?= $editProduct['image'] ?>'">
+                        <img src="<?= SITE_URL ?>/images/<?= $editProduct['image'] ?>" alt="Current" class="w-16 h-16 rounded-lg object-cover border border-gray-200" onerror="this.src='<?= SITE_URL ?>/<?= $editProduct['image'] ?>'">
                         <span class="text-xs text-gray-500">Current image</span>
                     </div>
                     <?php endif; ?>
@@ -198,7 +198,7 @@ require_once 'header.php';
                         <tr class="hover:bg-gray-50">
                             <td class="px-4 py-3">
                                 <div class="flex items-center gap-3">
-                                    <img src="<?= SITE_URL ?>/assets/images/<?= $p['image'] ?>" alt="" class="w-10 h-10 rounded-lg object-cover border border-gray-100" onerror="this.src='<?= SITE_URL ?>/<?= $p['image'] ?>'">
+                                    <img src="<?= SITE_URL ?>/images/<?= $p['image'] ?>" alt="" class="w-10 h-10 rounded-lg object-cover border border-gray-100" onerror="this.src='<?= SITE_URL ?>/<?= $p['image'] ?>'">
                                     <div>
                                         <p class="font-medium text-gray-900"><?= sanitize($p['name']) ?></p>
                                         <p class="text-xs text-gray-500"><?= sanitize($p['category']) ?> • <?= sanitize($p['brand']) ?></p>
@@ -243,3 +243,5 @@ require_once 'header.php';
 </div>
 
 <?php require_once 'footer.php'; ?>
+
+

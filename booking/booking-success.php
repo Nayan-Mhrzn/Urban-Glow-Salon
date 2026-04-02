@@ -95,7 +95,7 @@ require_once '../partials/header.php';
 
                     <!-- Image -->
                     <a href="product-details.php?id=<?= $product['id'] ?>" class="block pt-16 pb-6 bg-[#f8fafc] flex items-center justify-center">
-                        <img src="<?= SITE_URL ?>/assets/images/<?= $product['image'] ?>" alt="<?= sanitize($product['name']) ?>" class="h-[200px] object-contain group-hover:scale-105 transition-transform duration-500 drop-shadow-sm" onerror="this.src='https://via.placeholder.com/300x200?text=Product'">
+                        <img src="<?= SITE_URL ?>/images/<?= $product['image'] ?>" alt="<?= sanitize($product['name']) ?>" class="h-[200px] object-contain group-hover:scale-105 transition-transform duration-500 drop-shadow-sm" onerror="this.src='https://via.placeholder.com/300x200?text=Product'">
                     </a>
 
                     <!-- Details -->
@@ -138,3 +138,4 @@ require_once '../partials/header.php';
 </div>
 
 <?php require_once '../partials/footer.php'; ?>
+
