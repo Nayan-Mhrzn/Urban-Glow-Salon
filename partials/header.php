@@ -99,7 +99,7 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
                     <div class="relative" id="userDropdown">
                         <button class="flex items-center gap-2 px-4 py-2.5 rounded-full text-[16px] font-bold text-gray-700 hover:bg-[#EEF0FF] hover:text-[#4f46e5] transition-all" id="userTrigger">
                             <?php if (isset($_SESSION['profile_image']) && !empty($_SESSION['profile_image'])): ?>
-                                <img src="<?= SITE_URL ?>/images/profiles/<?= ['profile_image']) ?>" alt="Profile" class="w-7 h-7 rounded-full object-cover border border-gray-200">
+                                <img src="<?= SITE_URL ?>/images/profiles/<?= sanitize($_SESSION['profile_image']) ?>" alt="Profile" class="w-7 h-7 rounded-full object-cover border border-gray-200">
                             <?php else: ?>
                                 <i class="fas fa-user-circle text-2xl"></i>
                             <?php endif; ?>

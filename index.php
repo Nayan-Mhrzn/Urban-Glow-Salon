@@ -232,7 +232,7 @@ require_once 'partials/header.php';
                 <div class="flex items-center gap-3 mb-4">
                     <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
                         <?php if ($review['profile_image']): ?>
-                            <img src="<?= SITE_URL ?>/images/profiles/<?= ['profile_image'] ?>" alt="" class="w-full h-full object-cover">
+                            <img src="<?= SITE_URL ?>/images/profiles/<?= sanitize($review['profile_image']) ?>" alt="" class="w-full h-full object-cover">
                         <?php else: ?>
                             <i class="fas fa-user text-gray-400 text-lg"></i>
                         <?php endif; ?>

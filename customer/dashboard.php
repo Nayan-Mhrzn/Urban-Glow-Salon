@@ -110,7 +110,7 @@ require_once '../partials/header.php';
                     <div class="relative w-32 h-32 mx-auto mt-6 mb-4">
                         <div class="w-full h-full rounded-full border-4 border-white overflow-hidden bg-gray-100 shadow-sm">
                             <?php if ($user['profile_image']): ?>
-                                <img src="<?= SITE_URL ?>/images/profiles/<?= ['profile_image']) ?>" alt="Profile" class="w-full h-full object-cover">
+                                <img src="<?= SITE_URL ?>/images/profiles/<?= sanitize($user['profile_image']) ?>" alt="Profile" class="w-full h-full object-cover">
                             <?php else: ?>
                                 <div class="w-full h-full flex items-center justify-center bg-primary text-white text-4xl font-bold">
                                     <?= strtoupper(substr($user['full_name'], 0, 1)) ?>
