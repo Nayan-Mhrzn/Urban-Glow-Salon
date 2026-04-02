@@ -79,7 +79,7 @@ require_once '../partials/header.php';
                     <div class="flex items-center gap-3 mb-3">
                         <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden flex-shrink-0">
                             <?php if ($review['profile_image']): ?>
-                                <img src="<?= SITE_URL ?>/uploads/<?= $review['profile_image'] ?>" alt="" class="w-full h-full object-cover">
+                                <img src="<?= SITE_URL ?>/images/profiles/<?= ['profile_image'] ?>" alt="" class="w-full h-full object-cover">
                             <?php else: ?>
                                 <i class="fas fa-user text-gray-400 text-lg"></i>
                             <?php endif; ?>

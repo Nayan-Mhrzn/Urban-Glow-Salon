@@ -66,7 +66,7 @@ if ($file['size'] > $maxSize) {
 // Generate unique filename
 $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
 $filename = 'profile_' . $userId . '_' . time() . '.' . $ext;
-$uploadDir = dirname(__DIR__) . '/images/';
+$uploadDir = dirname(__DIR__) . '/images/profiles/';
 $destPath = $uploadDir . $filename;
 
 try {
