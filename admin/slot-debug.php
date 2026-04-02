@@ -6,8 +6,8 @@
  * Usage: slot-debug.php?customer_id=X&service_id=Y&date=YYYY-MM-DD
  */
 $pageTitle = 'Slot Score Debug';
-require_once dirname(__DIR__) . '/includes/config.php';
-require_once dirname(__DIR__) . '/includes/slot_scorer.php';
+require_once dirname(__DIR__) . '/config/config.php';
+require_once dirname(__DIR__) . '/core/slot_scorer.php';
 
 // Admin gate is enforced by header.php (calls requireAdmin())
 
@@ -189,3 +189,4 @@ require_once 'header.php';
 <?php endif; ?>
 
 <?php require_once 'footer.php'; ?>
+

@@ -2,7 +2,7 @@
 /**
  * Add to Cart API - Urban Glow Salon
  */
-require_once dirname(__DIR__) . '/includes/config.php';
+require_once dirname(__DIR__) . '/config/config.php';
 
 header('Content-Type: application/json');
 
@@ -41,3 +41,4 @@ $stmt->execute([$_SESSION['user_id'], $product_id, $quantity, $quantity]);
 
 $cartCount = getCartCount($pdo);
 echo json_encode(['success' => true, 'cartCount' => $cartCount, 'message' => 'Added to cart']);
+

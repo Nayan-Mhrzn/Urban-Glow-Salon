@@ -3,7 +3,7 @@
  * Staff Dashboard
  */
 $pageTitle = 'Dashboard';
-require_once dirname(__DIR__) . '/includes/config.php';
+require_once dirname(__DIR__) . '/config/config.php';
 requireStaff();
 
 setupDependencies();
@@ -153,3 +153,4 @@ require_once 'header.php';
 </div>
 
 <?php require_once 'footer.php'; ?>
+

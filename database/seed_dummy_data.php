@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__DIR__) . '/includes/config.php';
+require_once dirname(__DIR__) . '/config/config.php';
 
 echo "Starting dummy data seeding...\n";
 
@@ -179,3 +179,4 @@ foreach ($reviewsData as $r) {
 echo "Inserted reviews.\n";
 
 echo "Seeding completed successfully!\n";
+

@@ -2,7 +2,7 @@
 /**
  * Register API Handler - Urban Glow Salon
  */
-require_once dirname(__DIR__) . '/includes/config.php';
+require_once dirname(__DIR__) . '/config/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     redirect(SITE_URL . '/login.php');
@@ -78,3 +78,4 @@ loginUser($user);
 
 setFlash('success', 'Account created successfully! Welcome, ' . $full_name . '!');
 redirect(SITE_URL . '/index.php');
+

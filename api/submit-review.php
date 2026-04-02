@@ -2,7 +2,7 @@
 /**
  * Submit Review API - Urban Glow Salon
  */
-require_once dirname(__DIR__) . '/includes/config.php';
+require_once dirname(__DIR__) . '/config/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     redirect(SITE_URL . '/customer/reviews.php');
@@ -31,3 +31,4 @@ $stmt->execute([$_SESSION['user_id'], $review_type, $rating, $comment]);
 
 setFlash('success', 'Thank you for your review!');
 redirect(SITE_URL . '/customer/reviews.php');
+

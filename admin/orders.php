@@ -3,7 +3,7 @@
  * Admin - Manage Orders (with order items)
  */
 $pageTitle = 'Manage Orders';
-require_once dirname(__DIR__) . '/includes/config.php';
+require_once dirname(__DIR__) . '/config/config.php';
 
 // Handle status update
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
@@ -139,4 +139,5 @@ require_once 'header.php';
 </div>
 
 <?php require_once 'footer.php'; ?>
+
 

@@ -6,7 +6,7 @@
  * POST body (JSON): { slot_time, date, action, service_id }
  * Actions: "shown", "selected", "skipped"
  */
-require_once dirname(__DIR__) . '/includes/config.php';
+require_once dirname(__DIR__) . '/config/config.php';
 
 header('Content-Type: application/json');
 
@@ -73,3 +73,4 @@ try {
     http_response_code(500);
     echo json_encode(['error' => 'Failed to log interaction']);
 }
+

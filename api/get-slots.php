@@ -2,7 +2,7 @@
 /**
  * Get Available Time Slots API - Urban Glow Salon
  */
-require_once dirname(__DIR__) . '/includes/config.php';
+require_once dirname(__DIR__) . '/config/config.php';
 
 header('Content-Type: application/json');
 
@@ -15,3 +15,4 @@ if (empty($date)) {
 
 $slots = getTimeSlots($date, $pdo);
 echo json_encode(['slots' => $slots]);
+

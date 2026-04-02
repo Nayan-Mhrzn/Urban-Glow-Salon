@@ -2,7 +2,7 @@
 /**
  * Book Service API - Urban Glow Salon
  */
-require_once dirname(__DIR__) . '/includes/config.php';
+require_once dirname(__DIR__) . '/config/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     redirect(SITE_URL . '/booking/book-appointment.php');
@@ -55,3 +55,4 @@ $bookingId = $pdo->lastInsertId();
 
 setFlash('success', 'Appointment booked successfully! We look forward to seeing you.');
 redirect(SITE_URL . '/booking-success.php?id=' . $bookingId);
+

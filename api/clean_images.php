@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__DIR__) . '/includes/config.php';
+require_once dirname(__DIR__) . '/config/config.php';
 
 $imagesDir = dirname(__DIR__) . '/images/';
 
@@ -77,3 +77,4 @@ foreach ($products as $productId) {
 }
 
 echo "Removed $removedCount duplicate images. Updated main images for $updatedCount products.\n";
+

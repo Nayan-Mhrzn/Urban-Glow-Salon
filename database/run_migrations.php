@@ -2,7 +2,7 @@
 /**
  * Run database migrations for admin panel upgrade
  */
-require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../config/config.php';
 
 try {
     // 1. Create staff_services table
@@ -56,3 +56,4 @@ try {
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage() . "\n";
 }
+

@@ -3,7 +3,7 @@
  * Admin - Manage Bookings (Enhanced with staff assignment & filters)
  */
 $pageTitle = 'Manage Bookings';
-require_once dirname(__DIR__) . '/includes/config.php';
+require_once dirname(__DIR__) . '/config/config.php';
 
 // Handle actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -145,3 +145,4 @@ require_once 'header.php';
 </div>
 
 <?php require_once 'footer.php'; ?>
+

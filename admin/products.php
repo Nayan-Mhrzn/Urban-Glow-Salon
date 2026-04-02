@@ -3,7 +3,7 @@
  * Admin - Manage Products (with image upload)
  */
 $pageTitle = 'Manage Products';
-require_once dirname(__DIR__) . '/includes/config.php';
+require_once dirname(__DIR__) . '/config/config.php';
 
 // Ensure upload directory exists
 $uploadDir = SITE_ROOT . '/images/products/';
@@ -243,5 +243,6 @@ require_once 'header.php';
 </div>
 
 <?php require_once 'footer.php'; ?>
+
 
 

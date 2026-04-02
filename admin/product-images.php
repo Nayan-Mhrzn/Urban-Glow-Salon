@@ -4,7 +4,7 @@
  * Upload, delete, and drag-to-reorder images for a product
  */
 $pageTitle = 'Product Images';
-require_once dirname(__DIR__) . '/includes/config.php';
+require_once dirname(__DIR__) . '/config/config.php';
 
 $productId = (int)($_GET['id'] ?? 0);
 if (!$productId) {
@@ -274,5 +274,6 @@ if (grid) {
 </script>
 
 <?php require_once 'footer.php'; ?>
+
 
 

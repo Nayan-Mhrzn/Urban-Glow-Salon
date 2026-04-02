@@ -6,8 +6,8 @@
  * GET params: date, service_id
  * Returns JSON: { slots, recommended, fully_booked, high_risk }
  */
-require_once dirname(__DIR__) . '/includes/config.php';
-require_once dirname(__DIR__) . '/includes/slot_scorer.php';
+require_once dirname(__DIR__) . '/config/config.php';
+require_once dirname(__DIR__) . '/core/slot_scorer.php';
 
 header('Content-Type: application/json');
 
@@ -106,3 +106,4 @@ $output = [
 ];
 
 echo json_encode($output);
+

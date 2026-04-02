@@ -3,7 +3,7 @@
  * Admin - Reports & Analytics
  */
 $pageTitle = 'Reports & Analytics';
-require_once dirname(__DIR__) . '/includes/config.php';
+require_once dirname(__DIR__) . '/config/config.php';
 
 // Date range
 $range = $_GET['range'] ?? 'month';
@@ -313,3 +313,4 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <?php require_once 'footer.php'; ?>
+
