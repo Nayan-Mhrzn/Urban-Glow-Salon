@@ -1,0 +1,39 @@
+<?php
+/**
+ * Site Configuration - Urban Glow Salon
+ */
+
+// Start session if not already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Security Headers
+header('X-Content-Type-Options: nosniff');
+header('X-Frame-Options: SAMEORIGIN');
+header('X-XSS-Protection: 1; mode=block');
+header('Referrer-Policy: strict-origin-when-cross-origin');
+
+// Site settings
+define('SITE_NAME', 'Urban Glow Salon');
+define('SITE_TAGLINE', 'Premium Grooming For All');
+define('SITE_URL', 'https://nayanmaharjan.com.np');
+define('SITE_ROOT', dirname(__DIR__));
+
+// Directory paths
+define('INCLUDES_PATH', SITE_ROOT . '/includes');
+define('UPLOADS_PATH', SITE_ROOT . '/uploads');
+define('IMAGES_PATH', SITE_URL . '/images');
+
+// Working hours
+define('WORKING_HOURS_START', '09:00');
+define('WORKING_HOURS_END', '20:00');
+define('SLOT_DURATION_MINUTES', 30);
+
+// Currency
+define('CURRENCY_SYMBOL', 'Rs.');
+
+// Include database connection
+require_once INCLUDES_PATH . '/db_connect.php';
+require_once INCLUDES_PATH . '/functions.php';
+require_once INCLUDES_PATH . '/auth.php';

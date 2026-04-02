@@ -1,0 +1,242 @@
+/* =============================================
+   Urban Glow Salon — Custom Styles
+   Tailwind CSS overrides & custom animations
+   ============================================= */
+
+/* Globally scale up EVERYTHING (fonts, padding, margins, gaps, widths) using rems by 10% */
+html {
+    font-size: 110%; /* Default is 100% (16px), 110% makes it 17.6px */
+}
+
+/* ----- Custom Animations ----- */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(67, 57, 242, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 0 10px rgba(67, 57, 242, 0);
+    }
+}
+
+@keyframes gentleBounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.animate-gentle-bounce {
+    animation: gentleBounce 3.5s ease-in-out infinite;
+}
+
+.animate-slide-down {
+    animation: slideDown 0.3s ease;
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.5s ease;
+}
+
+.animate-scale-in {
+    animation: scaleIn 0.4s ease;
+}
+
+.animate-pulse-glow {
+    animation: pulse-glow 2s infinite;
+}
+
+/* ----- Skeleton Loading ----- */
+.skeleton {
+    background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
+    background-size: 400% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+/* ----- Dropdown Open State (JS controlled) ----- */
+.dropdown-open #dropdownMenu {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+}
+
+.dropdown-open #dropdownChevron {
+    transform: rotate(180deg);
+}
+
+/* ----- Star Rating Input (for review form) ----- */
+.star-rating-input {
+    display: flex;
+    gap: 4px;
+    direction: rtl;
+}
+
+.star-rating-input input {
+    display: none;
+}
+
+.star-rating-input label {
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #d1d5db;
+    transition: color 0.15s ease;
+}
+
+.star-rating-input label:hover,
+.star-rating-input label:hover~label,
+.star-rating-input input:checked~label {
+    color: #f59e0b;
+}
+
+/* ----- Custom Scrollbar ----- */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* ----- Time Slot Unavailable ----- */
+.time-slot-unavailable {
+    text-decoration: line-through;
+    cursor: not-allowed !important;
+}
+
+/* ----- Hero Gradient BG ----- */
+.hero-gradient {
+    background-color: #f0f4f8;
+    background-image: 
+        linear-gradient(135deg, rgba(238,240,255,0.8) 0%, rgba(232,230,255,0.8) 40%, rgba(217,222,255,0.8) 100%),
+        url("data:image/svg+xml,%3Csvg width='24' height='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1h22v22H1V1zm1 1v20h20V2H2z' fill='%23dbeafe' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+/* ----- Login BG Circles ----- */
+.login-bg {
+    background: #C5D5F0;
+}
+
+/* ----- Slot Card — Base ----- */
+.slot-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px 18px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    cursor: pointer;
+    background: #fff;
+    transition: all 0.2s ease;
+}
+
+.slot-card:hover {
+    border-color: #c7d2fe;
+    box-shadow: 0 4px 16px rgba(67, 57, 242, 0.08);
+    transform: translateY(-1px);
+}
+
+/* ----- Slot Card — Recommended ----- */
+.slot-card-recommended {
+    border: 2px solid transparent;
+    background:
+        linear-gradient(#fff, #fff) padding-box,
+        linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa) border-box;
+    background-color: rgba(238, 240, 255, 0.5);
+}
+
+.slot-card-recommended:hover {
+    box-shadow: 0 6px 24px rgba(99, 102, 241, 0.15);
+    transform: translateY(-2px);
+}
+
+/* ----- Slot Badge ----- */
+.slot-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: #6366f1;
+    background: rgba(99, 102, 241, 0.1);
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin-bottom: 2px;
+    width: fit-content;
+    text-transform: uppercase;
+}
+
+/* ----- Slot Card — Selected ----- */
+.slot-card-selected {
+    border: 2px solid #4339F2 !important;
+    background: rgba(238, 240, 255, 0.6) !important;
+    box-shadow: 0 0 0 3px rgba(67, 57, 242, 0.1);
+}
+
+/* ----- Slot Skeleton Loader ----- */
+.slot-skeleton {
+    background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
+    background-size: 400% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 12px;
+}
