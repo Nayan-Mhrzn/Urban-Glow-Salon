@@ -25,7 +25,7 @@ define('CONFIG_PATH', SITE_ROOT . '/config');
 define('CORE_PATH', SITE_ROOT . '/core');
 define('PARTIALS_PATH', SITE_ROOT . '/partials');
 define('ASSETS_PATH', SITE_URL . '/assets');
-define('UPLOADS_PATH', SITE_ROOT . '/uploads');
+define('UPLOADS_PATH', SITE_ROOT . '/images');
 define('IMAGES_PATH', SITE_URL . '/images');
 
 // Working hours
