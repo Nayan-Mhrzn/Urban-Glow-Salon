@@ -94,7 +94,7 @@ require_once 'header.php';
             <div class="px-6 py-3 bg-gray-50 divide-y divide-gray-100">
                 <?php foreach ($orderItems[$o['id']] as $item): ?>
                 <div class="flex items-center gap-3 py-2">
-                    <img src="<?= SITE_URL ?>/images/<?= $item['product_image'] ?>" alt="" class="w-8 h-8 rounded-lg object-cover" onerror="this.src='<?= SITE_URL ?>/<?= $item['product_image'] ?>'">
+                    <img src="<?= SITE_URL ?>/assets/images/<?= $item['product_image'] ?>" alt="" class="w-8 h-8 rounded-lg object-cover" onerror="this.src='<?= SITE_URL ?>/<?= $item['product_image'] ?>'">
                     <span class="text-sm text-gray-700 flex-1"><?= sanitize($item['product_name']) ?></span>
                     <span class="text-xs text-gray-500">x<?= $item['quantity'] ?></span>
                     <span class="text-sm font-semibold text-gray-900"><?= formatPrice($item['price_at_purchase'] * $item['quantity']) ?></span>

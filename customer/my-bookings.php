@@ -3,7 +3,7 @@
  * My Bookings History - Urban Glow Salon
  */
 $pageTitle = 'Appointment History';
-require_once 'includes/config.php';
+require_once '../config/config.php';
 requireLogin();
 
 $userId = $_SESSION['user_id'];
@@ -19,7 +19,7 @@ $stmtBookings = $pdo->prepare("
 $stmtBookings->execute([$userId]);
 $bookings = $stmtBookings->fetchAll();
 
-require_once 'includes/header.php';
+require_once '../partials/header.php';
 ?>
 
 <!-- Main Layout Wrapper -->
@@ -39,7 +39,7 @@ require_once 'includes/header.php';
                     <i class="fas fa-calendar-times text-6xl text-gray-300 mb-4"></i>
                     <h2 class="text-2xl font-bold text-gray-700 mb-2">No Appointments</h2>
                     <p class="text-gray-500 mb-6">You haven't booked any services yet.</p>
-                    <a href="services.php" class="inline-block bg-[#4f46e5] hover:bg-[#4338ca] text-white font-bold px-8 py-3 rounded-full transition-colors">Book a Service</a>
+                    <a href="../booking/services.php" class="inline-block bg-[#4f46e5] hover:bg-[#4338ca] text-white font-bold px-8 py-3 rounded-full transition-colors">Book a Service</a>
                 </div>
             <?php else: ?>
                 <!-- Bookings List -->
@@ -51,7 +51,7 @@ require_once 'includes/header.php';
                             <!-- Left: Image Block -->
                             <div class="w-full md:w-[180px] h-[140px] bg-[#f8fafc] rounded-xl flex items-center justify-center flex-shrink-0 relative overflow-hidden">
                                 <?php if ($booking['service_image']): ?>
-                                    <img src="<?= SITE_URL ?>/images/<?= sanitize($booking['service_image']) ?>" alt="Service" class="w-full h-full object-cover">
+                                    <img src="<?= SITE_URL ?>/assets/images/<?= sanitize($booking['service_image']) ?>" alt="Service" class="w-full h-full object-cover">
                                 <?php else: ?>
                                     <i class="fas fa-cut text-4xl text-gray-300"></i>
                                 <?php endif; ?>
@@ -124,4 +124,4 @@ require_once 'includes/header.php';
     </div>
 </div>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once '../partials/footer.php'; ?>

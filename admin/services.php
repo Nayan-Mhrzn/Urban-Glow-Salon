@@ -107,7 +107,7 @@ require_once 'header.php';
                 <div class="flex gap-2">
                     <button type="submit" class="flex-1 bg-primary text-white py-2 rounded-lg text-sm font-semibold hover:bg-primary-dark transition-all"><?= $editService ? 'Update' : 'Add' ?> Service</button>
                     <?php if ($editService): ?>
-                        <a href="services.php" class="px-4 py-2 border border-gray-200 rounded-lg text-sm text-gray-700 hover:bg-gray-50 transition-all">Cancel</a>
+                        <a href="../booking/services.php" class="px-4 py-2 border border-gray-200 rounded-lg text-sm text-gray-700 hover:bg-gray-50 transition-all">Cancel</a>
                     <?php endif; ?>
                 </div>
             </form>

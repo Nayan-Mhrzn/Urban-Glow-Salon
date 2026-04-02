@@ -2,7 +2,7 @@
 /**
  * Customer Order Details Page - Urban Glow Salon
  */
-require_once 'includes/config.php';
+require_once '../config/config.php';
 requireLogin();
 
 $orderId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
@@ -15,7 +15,7 @@ $order = $stmt->fetch();
 
 if (!$order) {
     setFlash('error', 'Order not found or you do not have permission to view this order.');
-    redirect(SITE_URL . '/dashboard.php');
+    redirect(SITE_URL . '/customer/dashboard.php');
 }
 
 // Get order items joined with products for image/name
@@ -29,14 +29,14 @@ $stmt->execute([$orderId]);
 $items = $stmt->fetchAll();
 
 $pageTitle = 'Order #' . $order['id'];
-require_once 'includes/header.php';
+require_once '../partials/header.php';
 ?>
 
 <div class="bg-gray-50 min-h-[calc(100vh-80px)] py-12">
     <div class="max-w-4xl mx-auto px-6">
         
         <!-- Back Button -->
-        <a href="<?= SITE_URL ?>/dashboard.php" class="inline-flex items-center text-sm font-semibold text-gray-500 hover:text-primary mb-6 transition-colors group">
+        <a href="<?= SITE_URL ?>/customer/dashboard.php" class="inline-flex items-center text-sm font-semibold text-gray-500 hover:text-primary mb-6 transition-colors group">
             <i class="fas fa-arrow-left mr-2 group-hover:-translate-x-1 transition-transform"></i> Back to Dashboard
         </a>
 
@@ -102,11 +102,11 @@ require_once 'includes/header.php';
                 <?php foreach ($items as $item): ?>
                 <div class="p-6 sm:px-8 flex items-center gap-6 hover:bg-[#EEF0FF] transition-colors group">
                     <div class="w-20 h-20 bg-white rounded-xl border border-gray-200 flex items-center justify-center p-2 flex-shrink-0 shadow-sm group-hover:border-primary/30 transition-colors">
-                        <img src="<?= SITE_URL ?>/images/<?= sanitize($item['image']) ?>" alt="<?= sanitize($item['name']) ?>" class="max-w-full max-h-full object-contain" onerror="this.src='https://via.placeholder.com/80'">
+                        <img src="<?= SITE_URL ?>/assets/images/<?= sanitize($item['image']) ?>" alt="<?= sanitize($item['name']) ?>" class="max-w-full max-h-full object-contain" onerror="this.src='https://via.placeholder.com/80'">
                     </div>
                     
                     <div class="flex-1">
-                        <h4 class="font-extrabold text-gray-900 text-[16px] mb-1.5 leading-snug"><a href="<?= SITE_URL ?>/product-details.php?id=<?= $item['product_id'] ?>" class="hover:text-primary transition-colors"><?= sanitize($item['name']) ?></a></h4>
+                        <h4 class="font-extrabold text-gray-900 text-[16px] mb-1.5 leading-snug"><a href="<?= SITE_URL ?>/shop/product-details.php?id=<?= $item['product_id'] ?>" class="hover:text-primary transition-colors"><?= sanitize($item['name']) ?></a></h4>
                         <div class="text-sm text-gray-500 font-semibold bg-gray-100 inline-block px-2.5 py-0.5 rounded-md">Qty: <?= $item['quantity'] ?></div>
                     </div>
 
@@ -130,4 +130,4 @@ require_once 'includes/header.php';
     </div>
 </div>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once '../partials/footer.php'; ?>

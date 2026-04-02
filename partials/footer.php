@@ -24,10 +24,10 @@
                     <h4 class="text-white text-base font-semibold mb-5">Quick Links</h4>
                     <ul class="space-y-2">
                         <li><a href="<?= SITE_URL ?>/index.php" class="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all inline-block">Home</a></li>
-                        <li><a href="<?= SITE_URL ?>/products.php" class="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all inline-block">Shop</a></li>
-                        <li><a href="<?= SITE_URL ?>/services.php" class="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all inline-block">Services</a></li>
-                        <li><a href="<?= SITE_URL ?>/reviews.php" class="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all inline-block">Reviews</a></li>
-                        <li><a href="<?= SITE_URL ?>/book-appointment.php" class="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all inline-block">Book Appointment</a></li>
+                        <li><a href="<?= SITE_URL ?>/shop/products.php" class="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all inline-block">Shop</a></li>
+                        <li><a href="<?= SITE_URL ?>/booking/services.php" class="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all inline-block">Services</a></li>
+                        <li><a href="<?= SITE_URL ?>/customer/reviews.php" class="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all inline-block">Reviews</a></li>
+                        <li><a href="<?= SITE_URL ?>/booking/book-appointment.php" class="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all inline-block">Book Appointment</a></li>
                     </ul>
                 </div>
 
@@ -35,11 +35,11 @@
                 <div>
                     <h4 class="text-white text-base font-semibold mb-5">Our Services</h4>
                     <ul class="space-y-2">
-                        <li><a href="<?= SITE_URL ?>/services.php?category=Hair" class="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all inline-block">Hair Styling</a></li>
-                        <li><a href="<?= SITE_URL ?>/services.php?category=Skin" class="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all inline-block">Skin Care</a></li>
-                        <li><a href="<?= SITE_URL ?>/services.php?category=Body" class="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all inline-block">Body Massage</a></li>
-                        <li><a href="<?= SITE_URL ?>/services.php?category=Makeup" class="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all inline-block">Bridal Makeup</a></li>
-                        <li><a href="<?= SITE_URL ?>/services.php?category=Nails" class="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all inline-block">Nail Services</a></li>
+                        <li><a href="<?= SITE_URL ?>/booking/services.php?category=Hair" class="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all inline-block">Hair Styling</a></li>
+                        <li><a href="<?= SITE_URL ?>/booking/services.php?category=Skin" class="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all inline-block">Skin Care</a></li>
+                        <li><a href="<?= SITE_URL ?>/booking/services.php?category=Body" class="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all inline-block">Body Massage</a></li>
+                        <li><a href="<?= SITE_URL ?>/booking/services.php?category=Makeup" class="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all inline-block">Bridal Makeup</a></li>
+                        <li><a href="<?= SITE_URL ?>/booking/services.php?category=Nails" class="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all inline-block">Nail Services</a></li>
                     </ul>
                 </div>
 
@@ -80,10 +80,10 @@
     <script>const siteUrl = '<?= SITE_URL ?>';</script>
     
     <!-- Scripts -->
-    <script src="<?= SITE_URL ?>/js/main.js"></script>
+    <script src="<?= SITE_URL ?>/assets/js/main.js"></script>
     <?php if (isset($extraJS)): ?>
         <?php foreach ($extraJS as $js): ?>
-            <script src="<?= SITE_URL ?>/js/<?= $js ?>"></script>
+            <script src="<?= SITE_URL ?>/assets/js/<?= $js ?>"></script>
         <?php endforeach; ?>
     <?php endif; ?>
 

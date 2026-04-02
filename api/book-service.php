@@ -5,14 +5,14 @@
 require_once dirname(__DIR__) . '/includes/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    redirect(SITE_URL . '/book-appointment.php');
+    redirect(SITE_URL . '/booking/book-appointment.php');
 }
 
 requireLogin();
 
 if (!verifyCSRFToken($_POST['csrf_token'] ?? '')) {
     setFlash('error', 'Invalid request.');
-    redirect(SITE_URL . '/book-appointment.php');
+    redirect(SITE_URL . '/booking/book-appointment.php');
 }
 
 $service_id = (int)($_POST['service_id'] ?? 0);
@@ -23,7 +23,7 @@ $notes = trim($_POST['notes'] ?? '');
 // Validate
 if (!$service_id || empty($booking_date) || empty($booking_time)) {
     setFlash('error', 'Please fill in all required fields.');
-    redirect(SITE_URL . '/book-appointment.php');
+    redirect(SITE_URL . '/booking/book-appointment.php');
 }
 
 // Check if slot is still available
@@ -31,7 +31,7 @@ $stmt = $pdo->prepare("SELECT id FROM bookings WHERE booking_date = ? AND bookin
 $stmt->execute([$booking_date, $booking_time]);
 if ($stmt->fetch()) {
     setFlash('error', 'This time slot is no longer available. Please choose another.');
-    redirect(SITE_URL . '/book-appointment.php');
+    redirect(SITE_URL . '/booking/book-appointment.php');
 }
 
 // Create booking

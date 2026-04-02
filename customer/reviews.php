@@ -3,13 +3,13 @@
  * Reviews Page - Urban Glow Salon
  */
 $pageTitle = 'Reviews';
-require_once 'includes/config.php';
+require_once '../config/config.php';
 
 // Fetch all reviews with user info
 $stmt = $pdo->query("SELECT r.*, u.username, u.profile_image FROM reviews r JOIN users u ON r.user_id = u.id ORDER BY r.created_at DESC");
 $reviews = $stmt->fetchAll();
 
-require_once 'includes/header.php';
+require_once '../partials/header.php';
 ?>
 
 <!-- Reviews Hero -->
@@ -111,4 +111,4 @@ require_once 'includes/header.php';
     </div>
 </div>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once '../partials/footer.php'; ?>

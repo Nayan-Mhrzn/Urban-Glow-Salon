@@ -3,7 +3,7 @@
  * Services Page - Urban Glow Salon
  */
 $pageTitle = 'Services';
-require_once 'includes/config.php';
+require_once '../config/config.php';
 
 // Get filter parameters
 $category = $_GET['category'] ?? '';
@@ -40,7 +40,7 @@ $categoryColors = [
     'Nails' => 'bg-purple-500'
 ];
 
-require_once 'includes/header.php';
+require_once '../partials/header.php';
 ?>
 
 <!-- Services Page -->
@@ -52,7 +52,7 @@ require_once 'includes/header.php';
             <h3 class="text-[22px] font-extrabold text-[#1a2b4c] mb-6 tracking-tight">Categories</h3>
             <ul class="space-y-2 mb-2">
                 <li>
-                    <a href="services.php" class="flex items-center justify-between w-full px-5 py-4 text-[15px] font-[600] rounded-[16px] transition-all <?= empty($category) ? 'bg-[#f4f8ff] text-[#2563eb]' : 'text-[#4a5568] hover:bg-gray-50 hover:text-gray-900' ?>">
+                    <a href="../booking/services.php" class="flex items-center justify-between w-full px-5 py-4 text-[15px] font-[600] rounded-[16px] transition-all <?= empty($category) ? 'bg-[#f4f8ff] text-[#2563eb]' : 'text-[#4a5568] hover:bg-gray-50 hover:text-gray-900' ?>">
                         All Services
                     </a>
                 </li>
@@ -87,7 +87,7 @@ require_once 'includes/header.php';
 
                 <!-- Service Image -->
                 <div class="h-48 bg-gray-100 overflow-hidden">
-                    <img src="<?= SITE_URL ?>/images/<?= $service['image'] ?>" alt="<?= sanitize($service['name']) ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/400x200?text=<?= urlencode($service['name']) ?>'">
+                    <img src="<?= SITE_URL ?>/assets/images/<?= $service['image'] ?>" alt="<?= sanitize($service['name']) ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/400x200?text=<?= urlencode($service['name']) ?>'">
                 </div>
 
                 <!-- Service Info -->
@@ -112,10 +112,10 @@ require_once 'includes/header.php';
             <i class="fas fa-spa text-6xl text-gray-300 mb-4"></i>
             <h3 class="text-xl font-semibold text-gray-700 mb-2">No services found</h3>
             <p class="text-gray-500 mb-6">Try adjusting your search or category filter.</p>
-            <a href="services.php" class="bg-primary text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-primary-dark transition-all">View All Services</a>
+            <a href="../booking/services.php" class="bg-primary text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-primary-dark transition-all">View All Services</a>
         </div>
         <?php endif; ?>
     </div>
 </div>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once '../partials/footer.php'; ?>

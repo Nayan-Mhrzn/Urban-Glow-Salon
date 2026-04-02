@@ -2,7 +2,7 @@
 /**
  * Customer Booking Details Page - Urban Glow Salon
  */
-require_once 'includes/config.php';
+require_once '../config/config.php';
 requireLogin();
 
 $bookingId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
@@ -20,18 +20,18 @@ $booking = $stmt->fetch();
 
 if (!$booking) {
     setFlash('error', 'Booking not found or you do not have permission to view this booking.');
-    redirect(SITE_URL . '/dashboard.php');
+    redirect(SITE_URL . '/customer/dashboard.php');
 }
 
 $pageTitle = 'Booking #' . $booking['id'];
-require_once 'includes/header.php';
+require_once '../partials/header.php';
 ?>
 
 <div class="bg-gray-50 min-h-[calc(100vh-80px)] py-12">
     <div class="max-w-4xl mx-auto px-6">
         
         <!-- Back Button -->
-        <a href="<?= SITE_URL ?>/dashboard.php" class="inline-flex items-center text-sm font-semibold text-gray-500 hover:text-primary mb-6 transition-colors group">
+        <a href="<?= SITE_URL ?>/customer/dashboard.php" class="inline-flex items-center text-sm font-semibold text-gray-500 hover:text-primary mb-6 transition-colors group">
             <i class="fas fa-arrow-left mr-2 group-hover:-translate-x-1 transition-transform"></i> Back to Dashboard
         </a>
 
@@ -110,7 +110,7 @@ require_once 'includes/header.php';
             
             <div class="p-6 sm:px-8 flex flex-col md:flex-row items-start md:items-center gap-6 hover:bg-[#EEF0FF] transition-colors group">
                 <div class="w-24 h-24 bg-white rounded-xl border border-gray-200 flex items-center justify-center p-2 flex-shrink-0 shadow-sm group-hover:border-primary/30 transition-colors overflow-hidden">
-                    <img src="<?= SITE_URL ?>/images/<?= sanitize($booking['service_image'] ?? 'placeholder-service.png') ?>" alt="<?= sanitize($booking['service_name']) ?>" class="w-full h-full object-cover rounded-lg" onerror="this.src='https://via.placeholder.com/100?text=Service'">
+                    <img src="<?= SITE_URL ?>/assets/images/<?= sanitize($booking['service_image'] ?? 'placeholder-service.png') ?>" alt="<?= sanitize($booking['service_name']) ?>" class="w-full h-full object-cover rounded-lg" onerror="this.src='https://via.placeholder.com/100?text=Service'">
                 </div>
                 
                 <div class="flex-1">
@@ -131,4 +131,4 @@ require_once 'includes/header.php';
     </div>
 </div>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once '../partials/footer.php'; ?>

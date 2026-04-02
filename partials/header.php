@@ -48,10 +48,10 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
     </script>
 
     <!-- Custom Styles (Tailwind overrides & custom components) -->
-    <link rel="stylesheet" href="<?= SITE_URL ?>/css/custom.css">
+    <link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/custom.css">
     <?php if (isset($extraCSS)): ?>
         <?php foreach ($extraCSS as $css): ?>
-            <link rel="stylesheet" href="<?= SITE_URL ?>/css/<?= $css ?>">
+            <link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/<?= $css ?>">
         <?php endforeach; ?>
     <?php endif; ?>
 </head>
@@ -76,15 +76,15 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
 
             <!-- Nav Links -->
             <ul class="hidden md:flex items-center gap-4" id="navLinks">
-                <li><a href="<?= SITE_URL ?>/products.php" class="px-3 py-2 text-[17px] font-semibold rounded-lg transition-all <?= $currentPage === 'products' ? 'text-[#4f46e5]' : 'text-gray-700 hover:text-[#4f46e5]' ?>">Shop</a></li>
-                <li><a href="<?= SITE_URL ?>/services.php" class="px-3 py-2 text-[17px] font-semibold rounded-lg transition-all <?= $currentPage === 'services' ? 'text-[#4f46e5]' : 'text-gray-700 hover:text-[#4f46e5]' ?>">Services</a></li>
-                <li><a href="<?= SITE_URL ?>/reviews.php" class="px-3 py-2 text-[17px] font-semibold rounded-lg transition-all <?= $currentPage === 'reviews' ? 'text-[#4f46e5]' : 'text-gray-700 hover:text-[#4f46e5]' ?>">Reviews</a></li>
+                <li><a href="<?= SITE_URL ?>/shop/products.php" class="px-3 py-2 text-[17px] font-semibold rounded-lg transition-all <?= $currentPage === 'products' ? 'text-[#4f46e5]' : 'text-gray-700 hover:text-[#4f46e5]' ?>">Shop</a></li>
+                <li><a href="<?= SITE_URL ?>/booking/services.php" class="px-3 py-2 text-[17px] font-semibold rounded-lg transition-all <?= $currentPage === 'services' ? 'text-[#4f46e5]' : 'text-gray-700 hover:text-[#4f46e5]' ?>">Services</a></li>
+                <li><a href="<?= SITE_URL ?>/customer/reviews.php" class="px-3 py-2 text-[17px] font-semibold rounded-lg transition-all <?= $currentPage === 'reviews' ? 'text-[#4f46e5]' : 'text-gray-700 hover:text-[#4f46e5]' ?>">Reviews</a></li>
             </ul>
 
             <!-- Nav Actions -->
             <div class="flex items-center gap-3">
                 <?php if (in_array($currentPage, ['products', 'services', 'product-details'])): ?>
-                <a href="<?= SITE_URL ?>/cart.php" class="relative w-10 h-10 flex items-center justify-center rounded-full text-gray-700 hover:bg-primary-bg hover:text-primary transition-all" id="cartIcon">
+                <a href="<?= SITE_URL ?>/shop/cart.php" class="relative w-10 h-10 flex items-center justify-center rounded-full text-gray-700 hover:bg-primary-bg hover:text-primary transition-all" id="cartIcon">
                     <i class="fas fa-shopping-cart text-lg"></i>
                     <?php if ($cartCount > 0): ?>
                         <span class="absolute top-0.5 right-0.5 w-[18px] h-[18px] bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center" id="cartBadge"><?= $cartCount ?></span>
@@ -99,7 +99,7 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
                     <div class="relative" id="userDropdown">
                         <button class="flex items-center gap-2 px-4 py-2.5 rounded-full text-[16px] font-bold text-gray-700 hover:bg-[#EEF0FF] hover:text-[#4f46e5] transition-all" id="userTrigger">
                             <?php if (isset($_SESSION['profile_image']) && !empty($_SESSION['profile_image'])): ?>
-                                <img src="<?= SITE_URL ?>/images/<?= sanitize($_SESSION['profile_image']) ?>" alt="Profile" class="w-7 h-7 rounded-full object-cover border border-gray-200">
+                                <img src="<?= SITE_URL ?>/assets/images/<?= sanitize($_SESSION['profile_image']) ?>" alt="Profile" class="w-7 h-7 rounded-full object-cover border border-gray-200">
                             <?php else: ?>
                                 <i class="fas fa-user-circle text-2xl"></i>
                             <?php endif; ?>
@@ -107,7 +107,7 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
                             <i class="fas fa-chevron-down text-[10px] transition-transform" id="dropdownChevron"></i>
                         </button>
                         <div class="absolute top-full right-0 mt-3 min-w-[220px] bg-white rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-gray-100 py-2 opacity-0 invisible -translate-y-2 transition-all duration-200" id="dropdownMenu">
-                            <a href="<?= SITE_URL ?>/dashboard.php" class="flex items-center gap-3 px-5 py-2.5 text-[15px] font-medium text-gray-700 hover:bg-[#EEF0FF] hover:text-[#4f46e5] transition-all"><i class="fas fa-tachometer-alt w-4 text-center"></i> Dashboard</a>
+                            <a href="<?= SITE_URL ?>/customer/dashboard.php" class="flex items-center gap-3 px-5 py-2.5 text-[15px] font-medium text-gray-700 hover:bg-[#EEF0FF] hover:text-[#4f46e5] transition-all"><i class="fas fa-tachometer-alt w-4 text-center"></i> Dashboard</a>
                             <?php if (isAdmin()): ?>
                                 <a href="<?= SITE_URL ?>/admin/" class="flex items-center gap-3 px-5 py-2.5 text-[15px] font-medium text-gray-700 hover:bg-[#EEF0FF] hover:text-[#4f46e5] transition-all"><i class="fas fa-cog w-4 text-center"></i> Admin Panel</a>
                             <?php endif; ?>
@@ -129,9 +129,9 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
         <!-- Mobile Nav Menu -->
         <div class="hidden md:hidden bg-white border-t border-gray-200 shadow-lg" id="mobileMenu">
             <div class="px-4 py-3 space-y-1">
-                <a href="<?= SITE_URL ?>/products.php" class="block px-4 py-3 text-sm font-medium rounded-lg <?= $currentPage === 'products' ? 'text-primary bg-primary-bg' : 'text-gray-700 hover:bg-gray-100' ?>">Shop</a>
-                <a href="<?= SITE_URL ?>/services.php" class="block px-4 py-3 text-sm font-medium rounded-lg <?= $currentPage === 'services' ? 'text-primary bg-primary-bg' : 'text-gray-700 hover:bg-gray-100' ?>">Services</a>
-                <a href="<?= SITE_URL ?>/reviews.php" class="block px-4 py-3 text-sm font-medium rounded-lg <?= $currentPage === 'reviews' ? 'text-primary bg-primary-bg' : 'text-gray-700 hover:bg-gray-100' ?>">Reviews</a>
+                <a href="<?= SITE_URL ?>/shop/products.php" class="block px-4 py-3 text-sm font-medium rounded-lg <?= $currentPage === 'products' ? 'text-primary bg-primary-bg' : 'text-gray-700 hover:bg-gray-100' ?>">Shop</a>
+                <a href="<?= SITE_URL ?>/booking/services.php" class="block px-4 py-3 text-sm font-medium rounded-lg <?= $currentPage === 'services' ? 'text-primary bg-primary-bg' : 'text-gray-700 hover:bg-gray-100' ?>">Services</a>
+                <a href="<?= SITE_URL ?>/customer/reviews.php" class="block px-4 py-3 text-sm font-medium rounded-lg <?= $currentPage === 'reviews' ? 'text-primary bg-primary-bg' : 'text-gray-700 hover:bg-gray-100' ?>">Reviews</a>
             </div>
         </div>
     </nav>

@@ -3,7 +3,7 @@
  * Book Appointment Page - Urban Glow Salon
  */
 $pageTitle = 'Book Appointment';
-require_once 'includes/config.php';
+require_once '../config/config.php';
 
 // Get pre-selected service
 $selectedServiceId = (int)($_GET['service'] ?? 0);
@@ -12,7 +12,7 @@ $selectedServiceId = (int)($_GET['service'] ?? 0);
 $stmt = $pdo->query("SELECT * FROM services WHERE is_active = 1 ORDER BY category, name");
 $services = $stmt->fetchAll();
 
-require_once 'includes/header.php';
+require_once '../partials/header.php';
 ?>
 
 <!-- Booking Hero -->
@@ -392,4 +392,4 @@ function updateSummary() {
 }
 </script>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once '../partials/footer.php'; ?>

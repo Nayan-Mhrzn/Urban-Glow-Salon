@@ -3,7 +3,7 @@
  * Products / Shop Page - Urban Glow Salon
  */
 $pageTitle = 'Shop';
-require_once 'includes/config.php';
+require_once '../config/config.php';
 
 // Get filter parameters
 $category = $_GET['category'] ?? '';
@@ -77,7 +77,7 @@ $brands = [
 $isFiltering = (!empty($category) || !empty($brand) || !empty($search));
 $recommendedProducts = [];
 if (!$isFiltering) {
-    require_once 'includes/recommender.php';
+    require_once '../core/recommender.php';
     $userId = $_SESSION['user_id'] ?? 0;
     $recommendedProducts = getRecommendedProducts($pdo, $userId, 4); // Get 4 recommendations
 }
@@ -85,7 +85,7 @@ if (!$isFiltering) {
 // Categories
 $productCategories = ['Hair Care', 'Beard & Moustache', 'Color & Treatments'];
 
-require_once 'includes/header.php';
+require_once '../partials/header.php';
 ?>
 
 <!-- Products Page Background -->
@@ -155,7 +155,7 @@ require_once 'includes/header.php';
                     </span>
 
                     <a href="product-details.php?id=<?= $product['id'] ?>" class="block h-[180px] bg-slate-50 rounded-2xl flex items-center justify-center mb-5">
-                        <img src="<?= SITE_URL ?>/images/<?= $product['image'] ?>" alt="<?= sanitize($product['name']) ?>" class="max-h-[160px] object-contain group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/300x200?text=<?= urlencode($product['name']) ?>'">
+                        <img src="<?= SITE_URL ?>/assets/images/<?= $product['image'] ?>" alt="<?= sanitize($product['name']) ?>" class="max-h-[160px] object-contain group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/300x200?text=<?= urlencode($product['name']) ?>'">
                     </a>
 
                     <div class="flex-1 flex flex-col">
@@ -175,7 +175,7 @@ require_once 'includes/header.php';
                             <button onclick="addToCart(<?= $product['id'] ?>)" class="flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 text-[13px] font-bold border-2 border-[#4f46e5] text-[#4f46e5] rounded-xl hover:bg-[#EEF0FF] transition-colors" <?= $product['stock_quantity'] < 1 ? 'disabled style="opacity:0.5"' : '' ?>>
                                 <i class="fas fa-cart-plus"></i> Cart
                             </button>
-                            <a href="checkout.php" onclick="addToCart(<?= $product['id'] ?>)" class="flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 text-[13px] font-bold bg-gradient-to-r from-[#4f46e5] to-[#6366f1] text-white rounded-xl hover:from-[#4338ca] hover:to-[#4f46e5] transition-all shadow-md shadow-indigo-200" <?= $product['stock_quantity'] < 1 ? 'style="pointer-events:none;opacity:0.5"' : '' ?>>
+                            <a href="../shop/checkout.php" onclick="addToCart(<?= $product['id'] ?>)" class="flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 text-[13px] font-bold bg-gradient-to-r from-[#4f46e5] to-[#6366f1] text-white rounded-xl hover:from-[#4338ca] hover:to-[#4f46e5] transition-all shadow-md shadow-indigo-200" <?= $product['stock_quantity'] < 1 ? 'style="pointer-events:none;opacity:0.5"' : '' ?>>
                                 <i class="fas fa-lock"></i> Buy
                             </a>
                         </div>
@@ -256,9 +256,9 @@ require_once 'includes/header.php';
                     <a href="products.php<?= !empty($category) ? '?category='.urlencode($category) : '' ?>" class="inline-flex items-center gap-2 bg-[#EEF0FF] text-[#4f46e5] text-xs font-bold px-3 py-1.5 rounded-full"><?= sanitize($brand) ?> <i class="fas fa-times opacity-60 hover:opacity-100"></i></a>
                 <?php endif; ?>
                 <?php if (!empty($search)): ?>
-                    <a href="products.php" class="inline-flex items-center gap-2 bg-[#EEF0FF] text-[#4f46e5] text-xs font-bold px-3 py-1.5 rounded-full">"<?= sanitize($search) ?>" <i class="fas fa-times opacity-60 hover:opacity-100"></i></a>
+                    <a href="../shop/products.php" class="inline-flex items-center gap-2 bg-[#EEF0FF] text-[#4f46e5] text-xs font-bold px-3 py-1.5 rounded-full">"<?= sanitize($search) ?>" <i class="fas fa-times opacity-60 hover:opacity-100"></i></a>
                 <?php endif; ?>
-                <a href="products.php" class="text-xs font-bold text-red-500 hover:text-red-700 ml-2">Clear all</a>
+                <a href="../shop/products.php" class="text-xs font-bold text-red-500 hover:text-red-700 ml-2">Clear all</a>
             </div>
             <?php endif; ?>
 
@@ -285,7 +285,7 @@ require_once 'includes/header.php';
 
                     <!-- Product Image -->
                     <a href="product-details.php?id=<?= $product['id'] ?>" class="block h-[180px] bg-slate-50 rounded-2xl flex items-center justify-center mb-5">
-                        <img src="<?= SITE_URL ?>/images/<?= $product['image'] ?>" alt="<?= sanitize($product['name']) ?>" class="max-h-[160px] object-contain group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/300x200?text=<?= urlencode($product['name']) ?>'">
+                        <img src="<?= SITE_URL ?>/assets/images/<?= $product['image'] ?>" alt="<?= sanitize($product['name']) ?>" class="max-h-[160px] object-contain group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/300x200?text=<?= urlencode($product['name']) ?>'">
                     </a>
 
                     <!-- Product Info -->
@@ -304,7 +304,7 @@ require_once 'includes/header.php';
                             <button onclick="addToCart(<?= $product['id'] ?>)" class="flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 text-[13px] font-bold border-2 border-[#4f46e5] text-[#4f46e5] rounded-xl hover:bg-[#EEF0FF] transition-colors" <?= $product['stock_quantity'] < 1 ? 'disabled style="opacity:0.5"' : '' ?>>
                                 <i class="fas fa-cart-plus"></i> Cart
                             </button>
-                            <a href="checkout.php" onclick="addToCart(<?= $product['id'] ?>)" class="flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 text-[13px] font-bold bg-gradient-to-r from-[#4f46e5] to-[#6366f1] text-white rounded-xl hover:from-[#4338ca] hover:to-[#4f46e5] transition-all shadow-md shadow-indigo-200" <?= $product['stock_quantity'] < 1 ? 'style="pointer-events:none;opacity:0.5"' : '' ?>>
+                            <a href="../shop/checkout.php" onclick="addToCart(<?= $product['id'] ?>)" class="flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 text-[13px] font-bold bg-gradient-to-r from-[#4f46e5] to-[#6366f1] text-white rounded-xl hover:from-[#4338ca] hover:to-[#4f46e5] transition-all shadow-md shadow-indigo-200" <?= $product['stock_quantity'] < 1 ? 'style="pointer-events:none;opacity:0.5"' : '' ?>>
                                 <i class="fas fa-lock"></i> Buy
                             </a>
                         </div>
@@ -318,11 +318,11 @@ require_once 'includes/header.php';
                 <i class="fas fa-shopping-bag text-6xl text-gray-300 mb-4"></i>
                 <h3 class="text-xl font-semibold text-gray-700 mb-2">No products found</h3>
                 <p class="text-gray-500 mb-6 font-medium">Try adjusting your search or filters.</p>
-                <a href="products.php" class="bg-[#4f46e5] text-white px-8 py-3 rounded-full text-[14px] font-bold hover:bg-[#4338ca] transition-all">View All Products</a>
+                <a href="../shop/products.php" class="bg-[#4f46e5] text-white px-8 py-3 rounded-full text-[14px] font-bold hover:bg-[#4338ca] transition-all">View All Products</a>
             </div>
             <?php endif; ?>
         </div>
     </div>
 </div>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once '../partials/footer.php'; ?>

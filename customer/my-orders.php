@@ -3,7 +3,7 @@
  * My Orders History - Urban Glow Salon
  */
 $pageTitle = 'Order History';
-require_once 'includes/config.php';
+require_once '../config/config.php';
 requireLogin();
 
 $userId = $_SESSION['user_id'];
@@ -20,7 +20,7 @@ $stmtOrders = $pdo->prepare("
 $stmtOrders->execute([$userId]);
 $orders = $stmtOrders->fetchAll();
 
-require_once 'includes/header.php';
+require_once '../partials/header.php';
 ?>
 
 <!-- Main Layout Wrapper -->
@@ -40,7 +40,7 @@ require_once 'includes/header.php';
                     <i class="fas fa-box-open text-6xl text-gray-300 mb-4"></i>
                     <h2 class="text-2xl font-bold text-gray-700 mb-2">No Orders Yet</h2>
                     <p class="text-gray-500 mb-6">You haven't placed any orders. Start exploring our premium products!</p>
-                    <a href="products.php" class="inline-block bg-[#3b82f6] hover:bg-[#2563eb] text-white font-bold px-8 py-3 rounded-full transition-colors">Go to Shop</a>
+                    <a href="../shop/products.php" class="inline-block bg-[#3b82f6] hover:bg-[#2563eb] text-white font-bold px-8 py-3 rounded-full transition-colors">Go to Shop</a>
                 </div>
             <?php else: ?>
                 <!-- Orders List -->
@@ -138,4 +138,4 @@ async function cancelOrder(id) {
 }
 </script>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once '../partials/footer.php'; ?>

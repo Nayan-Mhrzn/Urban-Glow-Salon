@@ -21,7 +21,10 @@ define('SITE_URL', 'https://nayanmaharjan.com.np');
 define('SITE_ROOT', dirname(__DIR__));
 
 // Directory paths
-define('INCLUDES_PATH', SITE_ROOT . '/includes');
+define('CONFIG_PATH', SITE_ROOT . '/config');
+define('CORE_PATH', SITE_ROOT . '/core');
+define('PARTIALS_PATH', SITE_ROOT . '/partials');
+define('ASSETS_PATH', SITE_URL . '/assets');
 define('UPLOADS_PATH', SITE_ROOT . '/uploads');
 define('IMAGES_PATH', SITE_URL . '/images');
 
@@ -34,6 +37,6 @@ define('SLOT_DURATION_MINUTES', 30);
 define('CURRENCY_SYMBOL', 'Rs.');
 
 // Include database connection
-require_once INCLUDES_PATH . '/db_connect.php';
-require_once INCLUDES_PATH . '/functions.php';
-require_once INCLUDES_PATH . '/auth.php';
+require_once CONFIG_PATH . '/db_connect.php';
+require_once CORE_PATH . '/functions.php';
+require_once CORE_PATH . '/auth.php';

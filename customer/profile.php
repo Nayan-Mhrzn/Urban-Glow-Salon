@@ -3,7 +3,7 @@
  * Profile Settings Page - Urban Glow Salon
  */
 $pageTitle = 'Profile Settings';
-require_once 'includes/config.php';
+require_once '../config/config.php';
 
 requireLogin();
 
@@ -23,7 +23,7 @@ if (!$user) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verifyCSRFToken($_POST['csrf_token'] ?? '')) {
         setFlash('error', 'Invalid request. Please try again.');
-        redirect(SITE_URL . '/profile.php');
+        redirect(SITE_URL . '/customer/profile.php');
     }
 
     $action = $_POST['action'] ?? '';
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 setFlash('error', 'Database error occurred.');
             }
         }
-        redirect(SITE_URL . '/profile.php');
+        redirect(SITE_URL . '/customer/profile.php');
     }
 
     // Change Password
@@ -70,18 +70,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 setFlash('error', 'Database error occurred.');
             }
         }
-        redirect(SITE_URL . '/profile.php');
+        redirect(SITE_URL . '/customer/profile.php');
     }
 }
 
-require_once 'includes/header.php';
+require_once '../partials/header.php';
 ?>
 
 <div class="bg-gray-50 min-h-[calc(100vh-80px)] py-12">
     <div class="max-w-3xl mx-auto px-6">
         
         <!-- Back Button -->
-        <a href="<?= SITE_URL ?>/dashboard.php" class="inline-flex items-center text-sm font-semibold text-gray-500 hover:text-primary mb-6 transition-colors group">
+        <a href="<?= SITE_URL ?>/customer/dashboard.php" class="inline-flex items-center text-sm font-semibold text-gray-500 hover:text-primary mb-6 transition-colors group">
             <i class="fas fa-arrow-left mr-2 group-hover:-translate-x-1 transition-transform"></i> Back to Dashboard
         </a>
 
@@ -172,4 +172,4 @@ require_once 'includes/header.php';
     </div>
 </div>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once '../partials/footer.php'; ?>

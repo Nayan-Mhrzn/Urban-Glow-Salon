@@ -3,7 +3,7 @@
  * Cart Page - Urban Glow Salon
  */
 $pageTitle = 'Cart';
-require_once 'includes/config.php';
+require_once '../config/config.php';
 
 requireLogin();
 
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([$cart_id, $_SESSION['user_id']]);
         setFlash('success', 'Item removed from cart.');
     }
-    redirect(SITE_URL . '/cart.php');
+    redirect(SITE_URL . '/shop/cart.php');
 }
 
 // Fetch cart items
@@ -35,7 +35,7 @@ foreach ($cartItems as $item) {
     $total += $itemPrice * $item['quantity'];
 }
 
-require_once 'includes/header.php';
+require_once '../partials/header.php';
 ?>
 
 <div class="max-w-7xl mx-auto px-6 py-8">
@@ -52,7 +52,7 @@ require_once 'includes/header.php';
                 <div class="bg-white rounded-xl shadow-card border border-gray-100 p-4 flex items-center gap-4">
                     <!-- Image -->
                     <div class="w-16 h-16 rounded-lg bg-gray-100 flex-shrink-0 overflow-hidden">
-                        <img src="<?= SITE_URL ?>/images/<?= $item['image'] ?>" alt="" class="w-full h-full object-contain p-1" onerror="this.src='https://via.placeholder.com/64'">
+                        <img src="<?= SITE_URL ?>/assets/images/<?= $item['image'] ?>" alt="" class="w-full h-full object-contain p-1" onerror="this.src='https://via.placeholder.com/64'">
                     </div>
                     
                     <!-- Info -->
@@ -108,10 +108,10 @@ require_once 'includes/header.php';
                         <span><?= formatPrice($total) ?></span>
                     </div>
                 </div>
-                <a href="checkout.php" class="w-full bg-primary hover:bg-primary-dark text-white text-sm font-semibold py-3 rounded-full transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                <a href="../shop/checkout.php" class="w-full bg-primary hover:bg-primary-dark text-white text-sm font-semibold py-3 rounded-full transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2">
                     <i class="fas fa-lock"></i> Proceed to Checkout
                 </a>
-                <a href="products.php" class="w-full mt-3 border-2 border-gray-200 text-gray-700 text-sm font-semibold py-3 rounded-full hover:bg-gray-50 transition-all flex items-center justify-center gap-2">
+                <a href="../shop/products.php" class="w-full mt-3 border-2 border-gray-200 text-gray-700 text-sm font-semibold py-3 rounded-full hover:bg-gray-50 transition-all flex items-center justify-center gap-2">
                     <i class="fas fa-arrow-left"></i> Continue Shopping
                 </a>
             </div>
@@ -122,11 +122,11 @@ require_once 'includes/header.php';
         <i class="fas fa-shopping-cart text-6xl text-gray-300 mb-4"></i>
         <h3 class="text-xl font-semibold text-gray-700 mb-2">Your cart is empty</h3>
         <p class="text-gray-500 mb-6">Add some products to get started!</p>
-        <a href="products.php" class="bg-primary text-white px-8 py-3 rounded-full text-sm font-semibold hover:bg-primary-dark transition-all">
+        <a href="../shop/products.php" class="bg-primary text-white px-8 py-3 rounded-full text-sm font-semibold hover:bg-primary-dark transition-all">
             <i class="fas fa-shopping-bag mr-1"></i> Browse Products
         </a>
     </div>
     <?php endif; ?>
 </div>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once '../partials/footer.php'; ?>

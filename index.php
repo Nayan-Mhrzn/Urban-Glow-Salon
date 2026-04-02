@@ -3,7 +3,7 @@
  * Home Page - Urban Glow Salon
  */
 $pageTitle = 'Home';
-require_once 'includes/config.php';
+require_once 'config/config.php';
 
 // Fetch featured products (newest 4)
 $stmt = $pdo->query("SELECT * FROM products WHERE is_active = 1 ORDER BY created_at DESC LIMIT 4");
@@ -17,7 +17,7 @@ $popularServices = $stmt->fetchAll();
 $stmt = $pdo->query("SELECT r.*, u.username, u.profile_image FROM reviews r JOIN users u ON r.user_id = u.id ORDER BY r.created_at DESC LIMIT 3");
 $recentReviews = $stmt->fetchAll();
 
-require_once 'includes/header.php';
+require_once 'partials/header.php';
 ?>
 
 <!-- ===== HERO SECTION ===== -->
@@ -46,10 +46,10 @@ require_once 'includes/header.php';
                 We Create <span class="text-[#4f46e5]">Confidence.</span>
             </p>
             <div class="flex flex-col sm:flex-row gap-5 justify-center md:justify-start">
-                <a href="products.php" class="bg-[#4f46e5] hover:bg-[#4338ca] text-white font-bold px-10 py-4 rounded-full transition-all hover:-translate-y-1 hover:shadow-lg text-[17px] inline-flex items-center justify-center gap-2">
+                <a href="shop/products.php" class="bg-[#4f46e5] hover:bg-[#4338ca] text-white font-bold px-10 py-4 rounded-full transition-all hover:-translate-y-1 hover:shadow-lg text-[17px] inline-flex items-center justify-center gap-2">
                     Shop Now
                 </a>
-                <a href="book-appointment.php" class="bg-white hover:bg-[#EEF0FF] text-[#4f46e5] font-bold px-10 py-4 rounded-full border-[2px] border-[#4f46e5] transition-all hover:-translate-y-1 hover:shadow-lg text-[17px] inline-flex items-center justify-center gap-2">
+                <a href="booking/book-appointment.php" class="bg-white hover:bg-[#EEF0FF] text-[#4f46e5] font-bold px-10 py-4 rounded-full border-[2px] border-[#4f46e5] transition-all hover:-translate-y-1 hover:shadow-lg text-[17px] inline-flex items-center justify-center gap-2">
                     Book Now
                 </a>
             </div>
@@ -86,7 +86,7 @@ require_once 'includes/header.php';
 
                 <!-- Product Image -->
                 <div class="h-52 bg-gray-50 flex items-center justify-center p-6 overflow-hidden">
-                    <img src="<?= SITE_URL ?>/images/<?= $product['image'] ?>" alt="<?= sanitize($product['name']) ?>" class="max-h-full object-contain group-hover:scale-110 transition-transform duration-500">
+                    <img src="<?= SITE_URL ?>/assets/images/<?= $product['image'] ?>" alt="<?= sanitize($product['name']) ?>" class="max-h-full object-contain group-hover:scale-110 transition-transform duration-500">
                 </div>
 
                 <!-- Product Info -->
@@ -114,7 +114,7 @@ require_once 'includes/header.php';
 
         <!-- View All Link -->
         <div class="text-center mt-10">
-            <a href="products.php" class="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">
+            <a href="shop/products.php" class="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">
                 View All Products <i class="fas fa-arrow-right"></i>
             </a>
         </div>
@@ -149,7 +149,7 @@ require_once 'includes/header.php';
 
                 <!-- Service Image -->
                 <div class="h-48 bg-gray-100 overflow-hidden">
-                    <img src="<?= SITE_URL ?>/images/<?= $service['image'] ?>" alt="<?= sanitize($service['name']) ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/400x200?text=<?= urlencode($service['name']) ?>'">
+                    <img src="<?= SITE_URL ?>/assets/images/<?= $service['image'] ?>" alt="<?= sanitize($service['name']) ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/400x200?text=<?= urlencode($service['name']) ?>'">
                 </div>
 
                 <!-- Service Info -->
@@ -168,7 +168,7 @@ require_once 'includes/header.php';
 
         <!-- View All Link -->
         <div class="text-center mt-10">
-            <a href="services.php" class="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">
+            <a href="booking/services.php" class="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">
                 Explore All Services <i class="fas fa-arrow-right"></i>
             </a>
         </div>
@@ -261,7 +261,7 @@ require_once 'includes/header.php';
         <?php endif; ?>
 
         <div class="text-center mt-10">
-            <a href="reviews.php" class="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">
+            <a href="customer/reviews.php" class="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">
                 View All Reviews <i class="fas fa-arrow-right"></i>
             </a>
         </div>
@@ -279,10 +279,10 @@ require_once 'includes/header.php';
             <h2 class="text-3xl md:text-4xl font-bold mb-4 relative z-10">Ready for a Fresh Look?</h2>
             <p class="text-lg text-white/80 mb-8 max-w-lg mx-auto relative z-10">Book your appointment today and experience premium grooming at Urban Glow Salon.</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
-                <a href="book-appointment.php" class="bg-white text-primary font-semibold px-8 py-3.5 rounded-full hover:-translate-y-1 hover:shadow-xl transition-all text-sm inline-flex items-center justify-center gap-2">
+                <a href="booking/book-appointment.php" class="bg-white text-primary font-semibold px-8 py-3.5 rounded-full hover:-translate-y-1 hover:shadow-xl transition-all text-sm inline-flex items-center justify-center gap-2">
                     <i class="fas fa-calendar-alt"></i> Book Appointment
                 </a>
-                <a href="services.php" class="bg-transparent text-white font-semibold px-8 py-3.5 rounded-full border-2 border-white/50 hover:bg-white/10 hover:-translate-y-1 transition-all text-sm inline-flex items-center justify-center gap-2">
+                <a href="booking/services.php" class="bg-transparent text-white font-semibold px-8 py-3.5 rounded-full border-2 border-white/50 hover:bg-white/10 hover:-translate-y-1 transition-all text-sm inline-flex items-center justify-center gap-2">
                     <i class="fas fa-spa"></i> Explore Services
                 </a>
             </div>
@@ -290,4 +290,4 @@ require_once 'includes/header.php';
     </div>
 </section>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once 'partials/footer.php'; ?>

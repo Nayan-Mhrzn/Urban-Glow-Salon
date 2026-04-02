@@ -3,7 +3,7 @@
  * Login / Sign Up Page - Urban Glow Salon
  */
 $pageTitle = 'Login';
-require_once 'includes/config.php';
+require_once 'config/config.php';
 
 // Redirect if already logged in
 if (isLoggedIn()) {
@@ -33,7 +33,7 @@ if (isLoggedIn()) {
             }
         }
     </script>
-    <link rel="stylesheet" href="<?= SITE_URL ?>/css/custom.css">
+    <link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/custom.css">
 </head>
 <body class="font-sans h-[100vh]  bg-[#b9d6fa] relative overflow-hidden flex items-center justify-center">
     

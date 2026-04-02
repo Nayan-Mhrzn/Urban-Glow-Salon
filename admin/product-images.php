@@ -106,7 +106,7 @@ require_once 'header.php';
 
 <!-- Breadcrumb -->
 <div class="flex items-center gap-2 mb-6 text-sm">
-    <a href="products.php" class="text-gray-500 hover:text-primary transition-colors"><i class="fas fa-arrow-left mr-1"></i>Products</a>
+    <a href="../shop/products.php" class="text-gray-500 hover:text-primary transition-colors"><i class="fas fa-arrow-left mr-1"></i>Products</a>
     <span class="text-gray-300">/</span>
     <span class="text-gray-900 font-semibold"><?= sanitize($product['name']) ?></span>
     <span class="text-gray-300">/</span>
@@ -141,7 +141,7 @@ require_once 'header.php';
             <div class="mt-6 pt-6 border-t border-gray-100">
                 <div class="flex items-center gap-3 mb-3">
                     <?php if ($product['image']): ?>
-                    <img src="<?= SITE_URL ?>/<?= $product['image'] ?>" alt="" class="w-12 h-12 rounded-xl object-cover border border-gray-100" onerror="this.src='<?= SITE_URL ?>/images/<?= $product['image'] ?>'">
+                    <img src="<?= SITE_URL ?>/<?= $product['image'] ?>" alt="" class="w-12 h-12 rounded-xl object-cover border border-gray-100" onerror="this.src='<?= SITE_URL ?>/assets/images/<?= $product['image'] ?>'">
                     <?php endif; ?>
                     <div>
                         <p class="font-semibold text-gray-900 text-sm"><?= sanitize($product['name']) ?></p>
@@ -170,7 +170,7 @@ require_once 'header.php';
             <div id="sortableGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 <?php foreach ($productImages as $img): ?>
                 <div class="sortable-item relative group rounded-2xl overflow-hidden border-2 border-gray-100 hover:border-primary transition-all cursor-grab active:cursor-grabbing" data-id="<?= $img['id'] ?>">
-                    <img src="<?= SITE_URL ?>/<?= $img['image_url'] ?>" alt="Product image" class="w-full aspect-square object-cover" onerror="this.src='<?= SITE_URL ?>/images/<?= $img['image_url'] ?>'">
+                    <img src="<?= SITE_URL ?>/<?= $img['image_url'] ?>" alt="Product image" class="w-full aspect-square object-cover" onerror="this.src='<?= SITE_URL ?>/assets/images/<?= $img['image_url'] ?>'">
 
                     <!-- Sort Handle Overlay -->
                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">

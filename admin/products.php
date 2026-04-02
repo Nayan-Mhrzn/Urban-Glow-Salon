@@ -132,7 +132,7 @@ require_once 'header.php';
                     <label class="block text-xs font-medium text-gray-600 mb-1">Product Image</label>
                     <?php if ($editProduct && $editProduct['image']): ?>
                     <div class="mb-2 flex items-center gap-3">
-                        <img src="<?= SITE_URL ?>/images/<?= $editProduct['image'] ?>" alt="Current" class="w-16 h-16 rounded-lg object-cover border border-gray-200" onerror="this.src='<?= SITE_URL ?>/<?= $editProduct['image'] ?>'">
+                        <img src="<?= SITE_URL ?>/assets/images/<?= $editProduct['image'] ?>" alt="Current" class="w-16 h-16 rounded-lg object-cover border border-gray-200" onerror="this.src='<?= SITE_URL ?>/<?= $editProduct['image'] ?>'">
                         <span class="text-xs text-gray-500">Current image</span>
                     </div>
                     <?php endif; ?>
@@ -158,7 +158,7 @@ require_once 'header.php';
                 <div class="flex gap-2">
                     <button type="submit" class="flex-1 bg-primary text-white py-2.5 rounded-xl text-sm font-semibold hover:bg-primary-dark transition-all"><?= $editProduct ? 'Update' : 'Add' ?> Product</button>
                     <?php if ($editProduct): ?>
-                        <a href="products.php" class="px-4 py-2.5 border border-gray-200 rounded-xl text-sm text-gray-700 hover:bg-gray-50 transition-all">Cancel</a>
+                        <a href="../shop/products.php" class="px-4 py-2.5 border border-gray-200 rounded-xl text-sm text-gray-700 hover:bg-gray-50 transition-all">Cancel</a>
                     <?php endif; ?>
                 </div>
             </form>
@@ -174,7 +174,7 @@ require_once 'header.php';
                 <button type="submit" class="px-4 py-2.5 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary-dark transition-all"><i class="fas fa-search"></i></button>
             </form>
             <div class="flex gap-2 flex-wrap">
-                <a href="products.php" class="px-3 py-2 rounded-xl text-xs font-semibold transition-all <?= !$catFilter ? 'bg-primary text-white' : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50' ?>">All</a>
+                <a href="../shop/products.php" class="px-3 py-2 rounded-xl text-xs font-semibold transition-all <?= !$catFilter ? 'bg-primary text-white' : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50' ?>">All</a>
                 <?php foreach ($productCategories as $c): ?>
                 <a href="products.php?category=<?= urlencode($c) ?>" class="px-3 py-2 rounded-xl text-xs font-semibold transition-all <?= $catFilter === $c ? 'bg-primary text-white' : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50' ?>"><?= $c ?></a>
                 <?php endforeach; ?>
@@ -198,7 +198,7 @@ require_once 'header.php';
                         <tr class="hover:bg-gray-50">
                             <td class="px-4 py-3">
                                 <div class="flex items-center gap-3">
-                                    <img src="<?= SITE_URL ?>/images/<?= $p['image'] ?>" alt="" class="w-10 h-10 rounded-lg object-cover border border-gray-100" onerror="this.src='<?= SITE_URL ?>/<?= $p['image'] ?>'">
+                                    <img src="<?= SITE_URL ?>/assets/images/<?= $p['image'] ?>" alt="" class="w-10 h-10 rounded-lg object-cover border border-gray-100" onerror="this.src='<?= SITE_URL ?>/<?= $p['image'] ?>'">
                                     <div>
                                         <p class="font-medium text-gray-900"><?= sanitize($p['name']) ?></p>
                                         <p class="text-xs text-gray-500"><?= sanitize($p['category']) ?> • <?= sanitize($p['brand']) ?></p>

@@ -3,7 +3,7 @@
  * Booking Success Page - Urban Glow Salon
  */
 $pageTitle = 'Booking Confirmed';
-require_once 'includes/config.php';
+require_once '../config/config.php';
 requireLogin();
 
 $bookingId = (int)($_GET['id'] ?? 0);
@@ -27,11 +27,11 @@ if (!$booking) {
 }
 
 // Get Cross-Sell Recommendations
-require_once 'includes/recommender.php';
+require_once '../core/recommender.php';
 // getCrossSellRecommendations($pdo, $serviceId, $topN)
 $crossSells = getCrossSellRecommendations($pdo, $booking['service_id'], 3);
 
-require_once 'includes/header.php';
+require_once '../partials/header.php';
 ?>
 
 <div class="bg-[#f0f4f8] min-h-[calc(100vh-80px)] py-12">
@@ -70,7 +70,7 @@ require_once 'includes/header.php';
                 </div>
             </div>
             
-            <a href="my-bookings.php" class="inline-flex justify-center items-center gap-2 bg-[#1f2937] hover:bg-black text-white px-8 py-3.5 rounded-full font-bold text-[15px] transition-all"><i class="fas fa-list"></i> View All My Appointments</a>
+            <a href="../customer/my-bookings.php" class="inline-flex justify-center items-center gap-2 bg-[#1f2937] hover:bg-black text-white px-8 py-3.5 rounded-full font-bold text-[15px] transition-all"><i class="fas fa-list"></i> View All My Appointments</a>
         </div>
 
         <?php if (!empty($crossSells)): ?>
@@ -95,7 +95,7 @@ require_once 'includes/header.php';
 
                     <!-- Image -->
                     <a href="product-details.php?id=<?= $product['id'] ?>" class="block pt-16 pb-6 bg-[#f8fafc] flex items-center justify-center">
-                        <img src="<?= SITE_URL ?>/images/<?= $product['image'] ?>" alt="<?= sanitize($product['name']) ?>" class="h-[200px] object-contain group-hover:scale-105 transition-transform duration-500 drop-shadow-sm" onerror="this.src='https://via.placeholder.com/300x200?text=Product'">
+                        <img src="<?= SITE_URL ?>/assets/images/<?= $product['image'] ?>" alt="<?= sanitize($product['name']) ?>" class="h-[200px] object-contain group-hover:scale-105 transition-transform duration-500 drop-shadow-sm" onerror="this.src='https://via.placeholder.com/300x200?text=Product'">
                     </a>
 
                     <!-- Details -->
@@ -129,7 +129,7 @@ require_once 'includes/header.php';
             </div>
             
             <div class="text-center mt-10">
-                <a href="products.php" class="text-[#6b7280] hover:text-[#4f46e5] font-semibold text-sm transition-colors decoration-2 hover:underline underline-offset-4">Browse full shop catalog &rarr;</a>
+                <a href="../shop/products.php" class="text-[#6b7280] hover:text-[#4f46e5] font-semibold text-sm transition-colors decoration-2 hover:underline underline-offset-4">Browse full shop catalog &rarr;</a>
             </div>
         </div>
         <?php endif; ?>
@@ -137,4 +137,4 @@ require_once 'includes/header.php';
     </div>
 </div>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once '../partials/footer.php'; ?>

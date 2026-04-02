@@ -31,7 +31,7 @@ $adminPage = basename($_SERVER['PHP_SELF'], '.php');
             }
         }
     </script>
-    <link rel="stylesheet" href="<?= SITE_URL ?>/css/custom.css">
+    <link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/custom.css">
 </head>
 <body class="font-sans bg-gray-100 text-gray-800">
     <div class="flex min-h-screen">

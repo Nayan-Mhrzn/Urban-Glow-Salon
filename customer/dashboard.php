@@ -3,7 +3,7 @@
  * User Dashboard - Urban Glow Salon
  */
 $pageTitle = 'My Dashboard';
-require_once 'includes/config.php';
+require_once '../config/config.php';
 requireLogin();
 
 // Fetch fresh user data including addresses
@@ -55,7 +55,7 @@ $stmtReviews = $pdo->prepare("
 $stmtReviews->execute([$_SESSION['user_id']]);
 $reviews = $stmtReviews->fetchAll();
 
-require_once 'includes/header.php';
+require_once '../partials/header.php';
 ?>
 
 <!-- Dashboard Wrapper -->
@@ -91,7 +91,7 @@ require_once 'includes/header.php';
                             </form>
                             
                             <!-- Password Change -->
-                            <a href="profile.php" class="flex items-center gap-3 px-6 py-3.5 hover:bg-[#EEF0FF] transition-colors group">
+                            <a href="../customer/profile.php" class="flex items-center gap-3 px-6 py-3.5 hover:bg-[#EEF0FF] transition-colors group">
                                 <i class="fas fa-lock fa-fw text-primary text-[17px] group-hover:text-primary-dark transition-colors"></i>
                                 <span class="text-[15px] font-semibold text-gray-800">Change Password</span>
                             </a>
@@ -110,7 +110,7 @@ require_once 'includes/header.php';
                     <div class="relative w-32 h-32 mx-auto mt-6 mb-4">
                         <div class="w-full h-full rounded-full border-4 border-white overflow-hidden bg-gray-100 shadow-sm">
                             <?php if ($user['profile_image']): ?>
-                                <img src="<?= SITE_URL ?>/images/<?= sanitize($user['profile_image']) ?>" alt="Profile" class="w-full h-full object-cover">
+                                <img src="<?= SITE_URL ?>/assets/images/<?= sanitize($user['profile_image']) ?>" alt="Profile" class="w-full h-full object-cover">
                             <?php else: ?>
                                 <div class="w-full h-full flex items-center justify-center bg-primary text-white text-4xl font-bold">
                                     <?= strtoupper(substr($user['full_name'], 0, 1)) ?>
@@ -169,7 +169,7 @@ require_once 'includes/header.php';
                         <h2 class="text-xl font-bold text-gray-900 leading-none">
                             <i class="far fa-calendar-check text-primary mr-2"></i>Appointments
                         </h2>
-                        <a href="my-bookings.php" class="text-primary hover:text-primary-dark text-sm font-semibold flex items-center gap-1">
+                        <a href="../customer/my-bookings.php" class="text-primary hover:text-primary-dark text-sm font-semibold flex items-center gap-1">
                             View All <i class="fas fa-chevron-right text-[10px] mt-0.5"></i>
                         </a>
                     </div>
@@ -181,7 +181,7 @@ require_once 'includes/header.php';
                             </div>
                             <h3 class="text-gray-900 font-bold mb-1">No appointments yet</h3>
                             <p class="text-gray-500 text-sm mb-4">Book a service to see it here.</p>
-                            <a href="services.php" class="inline-block bg-primary text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-primary-dark transition-colors">Book Now</a>
+                            <a href="../booking/services.php" class="inline-block bg-primary text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-primary-dark transition-colors">Book Now</a>
                         </div>
                     <?php else: ?>
                         <div class="space-y-4">
@@ -229,7 +229,7 @@ require_once 'includes/header.php';
                         <h2 class="text-xl font-bold text-gray-900 leading-none">
                             <i class="fas fa-shopping-bag text-primary mr-2"></i>Orders
                         </h2>
-                        <a href="my-orders.php" class="text-primary hover:text-primary-dark text-sm font-semibold flex items-center gap-1">
+                        <a href="../customer/my-orders.php" class="text-primary hover:text-primary-dark text-sm font-semibold flex items-center gap-1">
                             View All <i class="fas fa-chevron-right text-[10px] mt-0.5"></i>
                         </a>
                     </div>
@@ -241,7 +241,7 @@ require_once 'includes/header.php';
                             </div>
                             <h3 class="text-gray-900 font-bold mb-1">No orders yet</h3>
                             <p class="text-gray-500 text-sm mb-4">Start shopping for your favorite products.</p>
-                            <a href="products.php" class="inline-block bg-primary text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-primary-dark transition-colors">Shop Now</a>
+                            <a href="../shop/products.php" class="inline-block bg-primary text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-primary-dark transition-colors">Shop Now</a>
                         </div>
                     <?php else: ?>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -249,7 +249,7 @@ require_once 'includes/header.php';
                                 <div class="flex items-center gap-4 p-4 rounded-xl border border-gray-100 hover:border-primary/30 hover:shadow-sm transition-all bg-white group">
                                     <div class="w-16 h-16 bg-gray-50 rounded-lg flex items-center justify-center p-2 border border-gray-100 flex-shrink-0">
                                         <?php if ($order['first_product_image']): ?>
-                                            <img src="<?= SITE_URL ?>/images/<?= sanitize($order['first_product_image']) ?>" class="w-full h-full object-contain" alt="Product" onerror="this.src='https://via.placeholder.com/60?text=Order'">
+                                            <img src="<?= SITE_URL ?>/assets/images/<?= sanitize($order['first_product_image']) ?>" class="w-full h-full object-contain" alt="Product" onerror="this.src='https://via.placeholder.com/60?text=Order'">
                                         <?php else: ?>
                                             <i class="fas fa-box text-gray-300 text-2xl"></i>
                                         <?php endif; ?>
@@ -301,7 +301,7 @@ require_once 'includes/header.php';
                             </div>
                             <h3 class="text-gray-900 font-bold mb-1">No reviews written</h3>
                             <p class="text-gray-500 text-sm mb-4">Share your experience with products or services.</p>
-                            <a href="products.php" class="inline-block bg-primary text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-primary-dark transition-colors">Start Reviewing</a>
+                            <a href="../shop/products.php" class="inline-block bg-primary text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-primary-dark transition-colors">Start Reviewing</a>
                         </div>
                     <?php else: ?>
                         <div class="space-y-4">
@@ -310,7 +310,7 @@ require_once 'includes/header.php';
                                     <div class="flex gap-4">
                                         <div class="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center flex-shrink-0 border border-gray-100">
                                             <?php if ($review['target_image']): ?>
-                                                <img src="<?= SITE_URL ?>/images/<?= sanitize($review['target_image']) ?>" class="w-10 h-10 object-contain rounded" alt="Item">
+                                                <img src="<?= SITE_URL ?>/assets/images/<?= sanitize($review['target_image']) ?>" class="w-10 h-10 object-contain rounded" alt="Item">
                                             <?php else: ?>
                                                 <i class="fas <?= $review['review_type'] === 'Product' ? 'fa-box' : 'fa-spa' ?> text-gray-400"></i>
                                             <?php endif; ?>
@@ -469,4 +469,4 @@ if (settingsBtn && settingsDrop) {
 }
 </script>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once '../partials/footer.php'; ?>

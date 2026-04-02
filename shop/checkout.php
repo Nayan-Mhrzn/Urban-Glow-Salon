@@ -3,7 +3,7 @@
  * Checkout Page - Urban Glow Salon
  */
 $pageTitle = 'Checkout';
-require_once 'includes/config.php';
+require_once '../config/config.php';
 
 requireLogin();
 
@@ -21,7 +21,7 @@ $workAddress = $userAddrs['work_address'] ?? '';
 
 if (empty($cartItems)) {
     setFlash('warning', 'Your cart is empty.');
-    redirect(SITE_URL . '/products.php');
+    redirect(SITE_URL . '/shop/products.php');
 }
 
 $total = 0;
@@ -33,7 +33,7 @@ foreach ($cartItems as $item) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verifyCSRFToken($_POST['csrf_token'] ?? '')) {
         setFlash('error', 'Invalid request.');
-        redirect(SITE_URL . '/checkout.php');
+        redirect(SITE_URL . '/shop/checkout.php');
     }
 
     $address = trim($_POST['address'] ?? '');
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($address)) {
         setFlash('error', 'Please enter shipping address.');
-        redirect(SITE_URL . '/checkout.php');
+        redirect(SITE_URL . '/shop/checkout.php');
     }
 
     // Create order
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     redirect(SITE_URL . '/index.php');
 }
 
-require_once 'includes/header.php';
+require_once '../partials/header.php';
 ?>
 
 <div class="max-w-5xl mx-auto px-6 py-8">
@@ -123,7 +123,7 @@ require_once 'includes/header.php';
                     ?>
                     <div class="flex items-center gap-3 text-sm">
                         <div class="w-10 h-10 bg-gray-100 rounded-lg flex-shrink-0 overflow-hidden">
-                            <img src="<?= SITE_URL ?>/images/<?= $item['image'] ?>" alt="" class="w-full h-full object-contain p-0.5" onerror="this.src='https://via.placeholder.com/40'">
+                            <img src="<?= SITE_URL ?>/assets/images/<?= $item['image'] ?>" alt="" class="w-full h-full object-contain p-0.5" onerror="this.src='https://via.placeholder.com/40'">
                         </div>
                         <span class="flex-1 truncate text-gray-700"><?= sanitize($item['name']) ?> × <?= $item['quantity'] ?></span>
                         <span class="font-medium"><?= formatPrice($price * $item['quantity']) ?></span>
@@ -151,4 +151,4 @@ require_once 'includes/header.php';
     </form>
 </div>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once '../partials/footer.php'; ?>
