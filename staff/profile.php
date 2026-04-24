@@ -3,7 +3,7 @@
  * Staff - Profile Management
  */
 $pageTitle = 'My Profile';
-require_once dirname(__DIR__) . '/config/config.php';
+require_once dirname(__DIR__) . '/app/Config/config.php';
 requireStaff();
 
 $user = getCurrentUser($pdo);
@@ -15,6 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     if (empty($fullName)) {
         setFlash('error', 'Full name is required.');
+    } elseif (!empty($phone) && !preg_match('/^9\d{9}$/', $phone)) {
+        setFlash('error', 'Phone number must start with 9 and be exactly 10 digits.');
     } else {
         if (!empty($password)) {
             // Update with password
@@ -65,7 +67,7 @@ require_once 'header.php';
             
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-1.5">Phone Number</label>
-                <input type="tel" name="phone" value="<?= sanitize($user['phone']) ?>"
+                <input type="tel" name="phone" value="<?= sanitize($user['phone']) ?>" pattern="^9\d{9}$" maxlength="10" title="Phone number must start with 9 and be exactly 10 digits" placeholder="e.g. 9812345678"
                     class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all">
             </div>
             

@@ -3,10 +3,16 @@
  * My Bookings History - Urban Glow Salon
  */
 $pageTitle = 'Appointment History';
-require_once '../config/config.php';
+require_once '../app/Config/config.php';
 requireLogin();
 
 $userId = $_SESSION['user_id'];
+
+// Auto-cleanup stale bookings where the date has passed
+// 'Confirmed' assumes they showed up -> 'Completed'
+$pdo->exec("UPDATE bookings SET status = 'Completed', outcome = 'completed' WHERE booking_date < CURDATE() AND status = 'Confirmed'");
+// 'Pending' assumes they never followed through -> 'No Show'
+$pdo->exec("UPDATE bookings SET status = 'No Show', outcome = 'no_show' WHERE booking_date < CURDATE() AND status = 'Pending'");
 
 // Fetch all user bookings
 $stmtBookings = $pdo->prepare("
@@ -19,7 +25,7 @@ $stmtBookings = $pdo->prepare("
 $stmtBookings->execute([$userId]);
 $bookings = $stmtBookings->fetchAll();
 
-require_once '../partials/header.php';
+require_once '../Includes/Partials/header.php';
 ?>
 
 <!-- Main Layout Wrapper -->
@@ -51,7 +57,7 @@ require_once '../partials/header.php';
                             <!-- Left: Image Block -->
                             <div class="w-full md:w-[180px] h-[140px] bg-[#f8fafc] rounded-xl flex items-center justify-center flex-shrink-0 relative overflow-hidden">
                                 <?php if ($booking['service_image']): ?>
-                                    <img src="<?= SITE_URL ?>/images/<?= sanitize($booking['service_image']) ?>" alt="Service" class="w-full h-full object-cover">
+                                    <img src="<?= SITE_URL ?>/assets/img/<?= sanitize($booking['service_image']) ?>" alt="Service" class="w-full h-full object-cover">
                                 <?php else: ?>
                                     <i class="fas fa-cut text-4xl text-gray-300"></i>
                                 <?php endif; ?>
@@ -124,5 +130,5 @@ require_once '../partials/header.php';
     </div>
 </div>
 
-<?php require_once '../partials/footer.php'; ?>
+<?php require_once '../Includes/Partials/footer.php'; ?>
 

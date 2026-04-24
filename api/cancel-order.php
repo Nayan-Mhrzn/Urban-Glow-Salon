@@ -2,7 +2,7 @@
 /**
  * API - Cancel Order
  */
-require_once '../config/config.php';
+require_once '../app/Config/config.php';
 
 header('Content-Type: application/json');
 

@@ -3,7 +3,7 @@
  * Products / Shop Page - Urban Glow Salon
  */
 $pageTitle = 'Shop';
-require_once '../config/config.php';
+require_once '../app/Config/config.php';
 
 // Get filter parameters
 $category = $_GET['category'] ?? '';
@@ -59,18 +59,18 @@ $stmt = $pdo->prepare("SELECT * FROM products p WHERE $whereClause ORDER BY $ord
 $stmt->execute($params);
 $products = $stmt->fetchAll();
 
-// Get brands for sidebar (hardcoded order with logos from images/brands/)
+// Get brands for sidebar (hardcoded order with logos from assets/img/brands/)
 $brands = [
-    ['brand' => 'Beardo',                  'brand_logo' => 'images/brands/beardo.png'],
-    ['brand' => 'Ustraa',                  'brand_logo' => 'images/brands/ustraa.png'],
-    ['brand' => "L'Oréal Professionnel",   'brand_logo' => 'images/brands/loreal-professionnel.png'],
-    ['brand' => 'Kérastase',               'brand_logo' => 'images/brands/kerastase.png'],
-    ['brand' => 'Olaplex',                 'brand_logo' => 'images/brands/olaplex.png'],
-    ['brand' => 'Minimalist',              'brand_logo' => 'images/brands/minimalist.png'],
-    ['brand' => 'Arata',                   'brand_logo' => 'images/brands/arata.png'],
-    ['brand' => 'Garnier',                 'brand_logo' => 'images/brands/garnier.png'],
-    ['brand' => 'The Man Company',         'brand_logo' => 'images/brands/the-man-company.png'],
-    ['brand' => 'Plum Goodness',           'brand_logo' => 'images/brands/plum.png'],
+    ['brand' => 'Beardo',                  'brand_logo' => 'assets/img/brands/beardo.png'],
+    ['brand' => 'Ustraa',                  'brand_logo' => 'assets/img/brands/ustraa.png'],
+    ['brand' => "L'Oréal Professionnel",   'brand_logo' => 'assets/img/brands/loreal-professionnel.png'],
+    ['brand' => 'Kérastase',               'brand_logo' => 'assets/img/brands/kerastase.png'],
+    ['brand' => 'Olaplex',                 'brand_logo' => 'assets/img/brands/olaplex.png'],
+    ['brand' => 'Minimalist',              'brand_logo' => 'assets/img/brands/minimalist.png'],
+    ['brand' => 'Arata',                   'brand_logo' => 'assets/img/brands/arata.png'],
+    ['brand' => 'Garnier',                 'brand_logo' => 'assets/img/brands/garnier.png'],
+    ['brand' => 'The Man Company',         'brand_logo' => 'assets/img/brands/the-man-company.png'],
+    ['brand' => 'Plum Goodness',           'brand_logo' => 'assets/img/brands/plum.png'],
 ];
 
 // Get Recommendations (Only show if no active filters/searches are applied)
@@ -85,7 +85,7 @@ if (!$isFiltering) {
 // Categories
 $productCategories = ['Hair Care', 'Beard & Moustache', 'Color & Treatments'];
 
-require_once '../partials/header.php';
+require_once '../Includes/Partials/header.php';
 ?>
 
 <!-- Products Page Background -->
@@ -154,12 +154,12 @@ require_once '../partials/header.php';
                         <?= $stockText ?>
                     </span>
 
-                    <a href="product-details.php?id=<?= $product['id'] ?>" class="block h-[180px] bg-slate-50 rounded-2xl flex items-center justify-center mb-5">
-                        <img src="<?= SITE_URL ?>/images/<?= $product['image'] ?>" alt="<?= sanitize($product['name']) ?>" class="max-h-[160px] object-contain group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/300x200?text=<?= urlencode($product['name']) ?>'">
+                    <a href="product-details.php?id=<?= encodeProductId($product['id']) ?>" class="block h-[180px] bg-slate-50 rounded-2xl flex items-center justify-center mb-5">
+                        <img src="<?= SITE_URL ?>/assets/img/<?= $product['image'] ?>" alt="<?= sanitize($product['name']) ?>" class="max-h-[160px] object-contain group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/300x200?text=<?= urlencode($product['name']) ?>'">
                     </a>
 
                     <div class="flex-1 flex flex-col">
-                        <a href="product-details.php?id=<?= $product['id'] ?>" class="block">
+                        <a href="product-details.php?id=<?= encodeProductId($product['id']) ?>" class="block">
                             <h3 class="text-[15px] font-bold text-slate-800 mb-1 truncate hover:text-[#4f46e5] transition-colors"><?= sanitize($product['name']) ?></h3>
                         </a>
                         <p class="text-[12px] text-slate-500 mb-4 line-clamp-2 leading-relaxed flex-1"><?= sanitize($product['description']) ?></p>
@@ -284,13 +284,13 @@ require_once '../partials/header.php';
                     </span>
 
                     <!-- Product Image -->
-                    <a href="product-details.php?id=<?= $product['id'] ?>" class="block h-[180px] bg-slate-50 rounded-2xl flex items-center justify-center mb-5">
-                        <img src="<?= SITE_URL ?>/images/<?= $product['image'] ?>" alt="<?= sanitize($product['name']) ?>" class="max-h-[160px] object-contain group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/300x200?text=<?= urlencode($product['name']) ?>'">
+                    <a href="product-details.php?id=<?= encodeProductId($product['id']) ?>" class="block h-[180px] bg-slate-50 rounded-2xl flex items-center justify-center mb-5">
+                        <img src="<?= SITE_URL ?>/assets/img/<?= $product['image'] ?>" alt="<?= sanitize($product['name']) ?>" class="max-h-[160px] object-contain group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/300x200?text=<?= urlencode($product['name']) ?>'">
                     </a>
 
                     <!-- Product Info -->
                     <div class="flex-1 flex flex-col">
-                        <a href="product-details.php?id=<?= $product['id'] ?>" class="block">
+                        <a href="product-details.php?id=<?= encodeProductId($product['id']) ?>" class="block">
                             <h3 class="text-[15px] font-bold text-slate-800 mb-1 truncate hover:text-[#4f46e5] transition-colors"><?= sanitize($product['name']) ?></h3>
                         </a>
                         <p class="text-[12px] text-slate-500 mb-4 line-clamp-2 leading-relaxed flex-1"><?= sanitize($product['description']) ?></p>
@@ -325,5 +325,5 @@ require_once '../partials/header.php';
     </div>
 </div>
 
-<?php require_once '../partials/footer.php'; ?>
+<?php require_once '../Includes/Partials/footer.php'; ?>
 

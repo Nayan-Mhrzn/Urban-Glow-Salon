@@ -1,7 +1,7 @@
 <?php
-require_once dirname(__DIR__) . '/config/config.php';
+require_once dirname(__DIR__) . '/app/Config/config.php';
 
-$imagesDir = dirname(__DIR__) . '/images/';
+$imagesDir = dirname(__DIR__) . '/assets/img/';
 
 $stmt = $pdo->query("SELECT id FROM products");
 $products = $stmt->fetchAll(PDO::FETCH_COLUMN);

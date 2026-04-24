@@ -3,7 +3,7 @@
  * Services Page - Urban Glow Salon
  */
 $pageTitle = 'Services';
-require_once '../config/config.php';
+require_once '../app/Config/config.php';
 
 // Get filter parameters
 $category = $_GET['category'] ?? '';
@@ -40,7 +40,7 @@ $categoryColors = [
     'Nails' => 'bg-purple-500'
 ];
 
-require_once '../partials/header.php';
+require_once '../Includes/Partials/header.php';
 ?>
 
 <!-- Services Page -->
@@ -85,21 +85,25 @@ require_once '../partials/header.php';
                 <!-- Category Badge -->
                 <span class="absolute top-4 left-4 z-10 <?= $badgeColor ?> text-white text-xs font-semibold px-3 py-1 rounded-md"><?= $service['category'] ?></span>
 
-                <!-- Service Image -->
-                <div class="h-48 bg-gray-100 overflow-hidden">
-                    <img src="<?= SITE_URL ?>/images/<?= $service['image'] ?>" alt="<?= sanitize($service['name']) ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/400x200?text=<?= urlencode($service['name']) ?>'">
-                </div>
+                <a href="service-details.php?id=<?= $service['id'] ?>" class="block aspect-video bg-gray-100 overflow-hidden relative">
+                    <img src="<?= SITE_URL ?>/assets/img/<?= $service['image'] ?>" alt="<?= sanitize($service['name']) ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out" onerror="this.src='https://via.placeholder.com/600x400?text=<?= urlencode($service['name']) ?>'">
+                    <div class="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </a>
 
                 <!-- Service Info -->
-                <div class="p-5">
-                    <h3 class="font-semibold text-gray-900 text-lg mb-1"><?= sanitize($service['name']) ?></h3>
+                <div class="p-5 flex flex-col justify-between flex-1">
+                    <h3 class="font-bold text-gray-900 text-lg mb-1 leading-tight group-hover:text-primary transition-colors">
+                        <a href="service-details.php?id=<?= $service['id'] ?>" class="outline-none focus:ring-0">
+                            <?= sanitize($service['name']) ?>
+                        </a>
+                    </h3>
                     <p class="text-xl font-bold text-primary mb-2"><?= formatPrice($service['price']) ?></p>
                     <p class="text-sm text-gray-500 mb-3 line-clamp-2"><?= sanitize($service['description']) ?></p>
                     <div class="flex items-center gap-4 text-xs text-gray-500 mb-4">
                         <span class="flex items-center gap-1"><i class="far fa-clock"></i> <?= $service['duration_mins'] ?> mins</span>
                         <span class="flex items-center gap-1"><i class="fas fa-users"></i> <?= $service['gender'] ?></span>
                     </div>
-                    <a href="book-appointment.php?service=<?= $service['id'] ?>" class="w-full inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white text-sm font-semibold py-2.5 rounded-full transition-all hover:-translate-y-0.5">
+                    <a href="service-details.php?id=<?= $service['id'] ?>" class="w-full inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white text-sm font-semibold py-2.5 rounded-full transition-all hover:-translate-y-0.5">
                         <i class="fas fa-calendar-alt"></i> Book Now
                     </a>
                 </div>
@@ -118,5 +122,5 @@ require_once '../partials/header.php';
     </div>
 </div>
 
-<?php require_once '../partials/footer.php'; ?>
+<?php require_once '../Includes/Partials/footer.php'; ?>
 

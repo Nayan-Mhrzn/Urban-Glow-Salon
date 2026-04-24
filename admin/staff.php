@@ -3,7 +3,7 @@
  * Admin - Staff Management
  */
 $pageTitle = 'Manage Staff';
-require_once dirname(__DIR__) . '/config/config.php';
+require_once dirname(__DIR__) . '/app/Config/config.php';
 
 // Handle actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -14,6 +14,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = trim($_POST['email']);
         $fullName = trim($_POST['full_name']);
         $phone = trim($_POST['phone']);
+
+        if (!empty($phone) && !preg_match('/^9\d{9}$/', $phone)) {
+            setFlash('error', 'Phone number must start with 9 and be exactly 10 digits.');
+            redirect(SITE_URL . '/admin/staff.php');
+        }
+
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
         // Check duplicate
@@ -40,6 +46,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $fullName = trim($_POST['full_name']);
         $email = trim($_POST['email']);
         $phone = trim($_POST['phone']);
+
+        if (!empty($phone) && !preg_match('/^9\d{9}$/', $phone)) {
+            setFlash('error', 'Phone number must start with 9 and be exactly 10 digits.');
+            redirect(SITE_URL . '/admin/staff.php');
+        }
 
         $stmt = $pdo->prepare("UPDATE users SET full_name = ?, email = ?, phone = ? WHERE id = ? AND role = 'STAFF'");
         $stmt->execute([$fullName, $email, $phone, $staffId]);
@@ -122,7 +133,7 @@ require_once 'header.php';
                 </div>
                 <div>
                     <label class="block text-xs font-medium text-gray-600 mb-1">Phone</label>
-                    <input type="tel" name="phone" value="<?= $editStaff ? sanitize($editStaff['phone']) : '' ?>" class="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm focus:border-primary outline-none">
+                    <input type="tel" name="phone" value="<?= $editStaff ? sanitize($editStaff['phone']) : '' ?>" pattern="^9\d{9}$" maxlength="10" title="Phone number must start with 9 and be exactly 10 digits" placeholder="e.g. 9812345678" class="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm focus:border-primary outline-none">
                 </div>
 
                 <div>

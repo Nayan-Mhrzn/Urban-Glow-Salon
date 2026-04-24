@@ -6,7 +6,7 @@
  * POST body (JSON): { slot_time, date, action, service_id }
  * Actions: "shown", "selected", "skipped"
  */
-require_once dirname(__DIR__) . '/config/config.php';
+require_once dirname(__DIR__) . '/app/Config/config.php';
 
 header('Content-Type: application/json');
 

@@ -2,7 +2,7 @@
 /**
  * Customer Booking Details Page - Urban Glow Salon
  */
-require_once '../config/config.php';
+require_once '../app/Config/config.php';
 requireLogin();
 
 $bookingId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
@@ -24,7 +24,7 @@ if (!$booking) {
 }
 
 $pageTitle = 'Booking #' . $booking['id'];
-require_once '../partials/header.php';
+require_once '../Includes/Partials/header.php';
 ?>
 
 <div class="bg-gray-50 min-h-[calc(100vh-80px)] py-12">
@@ -110,7 +110,7 @@ require_once '../partials/header.php';
             
             <div class="p-6 sm:px-8 flex flex-col md:flex-row items-start md:items-center gap-6 hover:bg-[#EEF0FF] transition-colors group">
                 <div class="w-24 h-24 bg-white rounded-xl border border-gray-200 flex items-center justify-center p-2 flex-shrink-0 shadow-sm group-hover:border-primary/30 transition-colors overflow-hidden">
-                    <img src="<?= SITE_URL ?>/images/<?= sanitize($booking['service_image'] ?? 'placeholder-service.png') ?>" alt="<?= sanitize($booking['service_name']) ?>" class="w-full h-full object-cover rounded-lg" onerror="this.src='https://via.placeholder.com/100?text=Service'">
+                    <img src="<?= SITE_URL ?>/assets/img/<?= sanitize($booking['service_image'] ?? 'placeholder-service.png') ?>" alt="<?= sanitize($booking['service_name']) ?>" class="w-full h-full object-cover rounded-lg" onerror="this.src='https://via.placeholder.com/100?text=Service'">
                 </div>
                 
                 <div class="flex-1">
@@ -131,5 +131,5 @@ require_once '../partials/header.php';
     </div>
 </div>
 
-<?php require_once '../partials/footer.php'; ?>
+<?php require_once '../Includes/Partials/footer.php'; ?>
 

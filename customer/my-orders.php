@@ -3,7 +3,7 @@
  * My Orders History - Urban Glow Salon
  */
 $pageTitle = 'Order History';
-require_once '../config/config.php';
+require_once '../app/Config/config.php';
 requireLogin();
 
 $userId = $_SESSION['user_id'];
@@ -20,7 +20,7 @@ $stmtOrders = $pdo->prepare("
 $stmtOrders->execute([$userId]);
 $orders = $stmtOrders->fetchAll();
 
-require_once '../partials/header.php';
+require_once '../Includes/Partials/header.php';
 ?>
 
 <!-- Main Layout Wrapper -->
@@ -138,4 +138,4 @@ async function cancelOrder(id) {
 }
 </script>
 
-<?php require_once '../partials/footer.php'; ?>
+<?php require_once '../Includes/Partials/footer.php'; ?>

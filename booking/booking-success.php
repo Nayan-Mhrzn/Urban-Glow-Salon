@@ -3,7 +3,7 @@
  * Booking Success Page - Urban Glow Salon
  */
 $pageTitle = 'Booking Confirmed';
-require_once '../config/config.php';
+require_once '../app/Config/config.php';
 requireLogin();
 
 $bookingId = (int)($_GET['id'] ?? 0);
@@ -31,7 +31,7 @@ require_once '../core/recommender.php';
 // getCrossSellRecommendations($pdo, $serviceId, $topN)
 $crossSells = getCrossSellRecommendations($pdo, $booking['service_id'], 3);
 
-require_once '../partials/header.php';
+require_once '../Includes/Partials/header.php';
 ?>
 
 <div class="bg-[#f0f4f8] min-h-[calc(100vh-80px)] py-12">
@@ -94,13 +94,13 @@ require_once '../partials/header.php';
                     </div>
 
                     <!-- Image -->
-                    <a href="product-details.php?id=<?= $product['id'] ?>" class="block pt-16 pb-6 bg-[#f8fafc] flex items-center justify-center">
-                        <img src="<?= SITE_URL ?>/images/<?= $product['image'] ?>" alt="<?= sanitize($product['name']) ?>" class="h-[200px] object-contain group-hover:scale-105 transition-transform duration-500 drop-shadow-sm" onerror="this.src='https://via.placeholder.com/300x200?text=Product'">
+                    <a href="../shop/product-details.php?id=<?= encodeProductId($product['id']) ?>" class="block pt-16 pb-6 bg-[#f8fafc] flex items-center justify-center">
+                        <img src="<?= SITE_URL ?>/assets/img/<?= $product['image'] ?>" alt="<?= sanitize($product['name']) ?>" class="h-[200px] object-contain group-hover:scale-105 transition-transform duration-500 drop-shadow-sm" onerror="this.src='https://via.placeholder.com/300x200?text=Product'">
                     </a>
 
                     <!-- Details -->
                     <div class="p-6 flex-1 flex flex-col bg-white">
-                        <a href="product-details.php?id=<?= $product['id'] ?>" class="block flex-1">
+                        <a href="../shop/product-details.php?id=<?= encodeProductId($product['id']) ?>" class="block flex-1">
                             <h3 class="text-[17px] font-extrabold text-gray-900 mb-2 leading-tight group-hover:text-[#4f46e5] transition-colors"><?= sanitize($product['name']) ?></h3>
                         </a>
                         
@@ -137,5 +137,5 @@ require_once '../partials/header.php';
     </div>
 </div>
 
-<?php require_once '../partials/footer.php'; ?>
+<?php require_once '../Includes/Partials/footer.php'; ?>
 

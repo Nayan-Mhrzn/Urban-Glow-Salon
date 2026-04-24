@@ -2,7 +2,7 @@
 /**
  * Login API Handler - Urban Glow Salon
  */
-require_once dirname(__DIR__) . '/config/config.php';
+require_once dirname(__DIR__) . '/app/Config/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     redirect(SITE_URL . '/login.php');

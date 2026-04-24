@@ -3,7 +3,7 @@
  * Admin - Reports & Analytics
  */
 $pageTitle = 'Reports & Analytics';
-require_once dirname(__DIR__) . '/config/config.php';
+require_once dirname(__DIR__) . '/app/Config/config.php';
 
 // Date range
 $range = $_GET['range'] ?? 'month';

@@ -2,7 +2,7 @@
 /**
  * Customer Order Details Page - Urban Glow Salon
  */
-require_once '../config/config.php';
+require_once '../app/Config/config.php';
 requireLogin();
 
 $orderId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
@@ -29,7 +29,7 @@ $stmt->execute([$orderId]);
 $items = $stmt->fetchAll();
 
 $pageTitle = 'Order #' . $order['id'];
-require_once '../partials/header.php';
+require_once '../Includes/Partials/header.php';
 ?>
 
 <div class="bg-gray-50 min-h-[calc(100vh-80px)] py-12">
@@ -102,11 +102,11 @@ require_once '../partials/header.php';
                 <?php foreach ($items as $item): ?>
                 <div class="p-6 sm:px-8 flex items-center gap-6 hover:bg-[#EEF0FF] transition-colors group">
                     <div class="w-20 h-20 bg-white rounded-xl border border-gray-200 flex items-center justify-center p-2 flex-shrink-0 shadow-sm group-hover:border-primary/30 transition-colors">
-                        <img src="<?= SITE_URL ?>/images/<?= sanitize($item['image']) ?>" alt="<?= sanitize($item['name']) ?>" class="max-w-full max-h-full object-contain" onerror="this.src='https://via.placeholder.com/80'">
+                        <img src="<?= SITE_URL ?>/assets/img/<?= sanitize($item['image']) ?>" alt="<?= sanitize($item['name']) ?>" class="max-w-full max-h-full object-contain" onerror="this.src='https://via.placeholder.com/80'">
                     </div>
                     
                     <div class="flex-1">
-                        <h4 class="font-extrabold text-gray-900 text-[16px] mb-1.5 leading-snug"><a href="<?= SITE_URL ?>/shop/product-details.php?id=<?= $item['product_id'] ?>" class="hover:text-primary transition-colors"><?= sanitize($item['name']) ?></a></h4>
+                        <h4 class="font-extrabold text-gray-900 text-[16px] mb-1.5 leading-snug"><a href="<?= SITE_URL ?>/shop/product-details.php?id=<?= encodeProductId($item['product_id']) ?>" class="hover:text-primary transition-colors"><?= sanitize($item['name']) ?></a></h4>
                         <div class="text-sm text-gray-500 font-semibold bg-gray-100 inline-block px-2.5 py-0.5 rounded-md">Qty: <?= $item['quantity'] ?></div>
                     </div>
 
@@ -130,5 +130,5 @@ require_once '../partials/header.php';
     </div>
 </div>
 
-<?php require_once '../partials/footer.php'; ?>
+<?php require_once '../Includes/Partials/footer.php'; ?>
 

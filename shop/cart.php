@@ -3,7 +3,7 @@
  * Cart Page - Urban Glow Salon
  */
 $pageTitle = 'Cart';
-require_once '../config/config.php';
+require_once '../app/Config/config.php';
 
 requireLogin();
 
@@ -35,7 +35,7 @@ foreach ($cartItems as $item) {
     $total += $itemPrice * $item['quantity'];
 }
 
-require_once '../partials/header.php';
+require_once '../Includes/Partials/header.php';
 ?>
 
 <div class="max-w-7xl mx-auto px-6 py-8">
@@ -52,7 +52,7 @@ require_once '../partials/header.php';
                 <div class="bg-white rounded-xl shadow-card border border-gray-100 p-4 flex items-center gap-4">
                     <!-- Image -->
                     <div class="w-16 h-16 rounded-lg bg-gray-100 flex-shrink-0 overflow-hidden">
-                        <img src="<?= SITE_URL ?>/images/<?= $item['image'] ?>" alt="" class="w-full h-full object-contain p-1" onerror="this.src='https://via.placeholder.com/64'">
+                        <img src="<?= SITE_URL ?>/assets/img/<?= $item['image'] ?>" alt="" class="w-full h-full object-contain p-1" onerror="this.src='https://via.placeholder.com/64'">
                     </div>
                     
                     <!-- Info -->
@@ -129,5 +129,5 @@ require_once '../partials/header.php';
     <?php endif; ?>
 </div>
 
-<?php require_once '../partials/footer.php'; ?>
+<?php require_once '../Includes/Partials/footer.php'; ?>
 

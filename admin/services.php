@@ -3,7 +3,7 @@
  * Admin - Manage Services
  */
 $pageTitle = 'Manage Services';
-require_once dirname(__DIR__) . '/config/config.php';
+require_once dirname(__DIR__) . '/app/Config/config.php';
 
 // Handle actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

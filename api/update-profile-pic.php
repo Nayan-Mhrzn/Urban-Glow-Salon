@@ -2,7 +2,7 @@
 /**
  * API - Update User Profile Picture
  */
-require_once '../config/config.php';
+require_once '../app/Config/config.php';
 
 header('Content-Type: application/json');
 
@@ -66,7 +66,7 @@ if ($file['size'] > $maxSize) {
 // Generate unique filename
 $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
 $filename = 'profile_' . $userId . '_' . time() . '.' . $ext;
-$uploadDir = dirname(__DIR__) . '/images/profiles/';
+$uploadDir = dirname(__DIR__) . '/assets/uploads/profiles/';
 $destPath = $uploadDir . $filename;
 
 try {

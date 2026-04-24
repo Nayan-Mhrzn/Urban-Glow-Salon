@@ -3,7 +3,7 @@
  * User Dashboard - Urban Glow Salon
  */
 $pageTitle = 'My Dashboard';
-require_once '../config/config.php';
+require_once '../app/Config/config.php';
 requireLogin();
 
 // Fetch fresh user data including addresses
@@ -27,6 +27,12 @@ $stmtOrders = $pdo->prepare("
 ");
 $stmtOrders->execute([$_SESSION['user_id']]);
 $orders = $stmtOrders->fetchAll();
+
+// Auto-cleanup stale bookings where the date has passed
+// 'Confirmed' assumes they showed up -> 'Completed'
+$pdo->exec("UPDATE bookings SET status = 'Completed', outcome = 'completed' WHERE booking_date < CURDATE() AND status = 'Confirmed'");
+// 'Pending' assumes they never followed through -> 'No Show'
+$pdo->exec("UPDATE bookings SET status = 'No Show', outcome = 'no_show' WHERE booking_date < CURDATE() AND status = 'Pending'");
 
 // Fetch recent appointments (limit 5)
 $stmtAppointments = $pdo->prepare("
@@ -55,7 +61,7 @@ $stmtReviews = $pdo->prepare("
 $stmtReviews->execute([$_SESSION['user_id']]);
 $reviews = $stmtReviews->fetchAll();
 
-require_once '../partials/header.php';
+require_once '../Includes/Partials/header.php';
 ?>
 
 <!-- Dashboard Wrapper -->
@@ -110,7 +116,7 @@ require_once '../partials/header.php';
                     <div class="relative w-32 h-32 mx-auto mt-6 mb-4">
                         <div class="w-full h-full rounded-full border-4 border-white overflow-hidden bg-gray-100 shadow-sm">
                             <?php if ($user['profile_image']): ?>
-                                <img src="<?= SITE_URL ?>/images/profiles/<?= sanitize($user['profile_image']) ?>" alt="Profile" class="w-full h-full object-cover">
+                                <img src="<?= SITE_URL ?>/assets/uploads/profiles/<?= sanitize($user['profile_image']) ?>" alt="Profile" class="w-full h-full object-cover">
                             <?php else: ?>
                                 <div class="w-full h-full flex items-center justify-center bg-primary text-white text-4xl font-bold">
                                     <?= strtoupper(substr($user['full_name'], 0, 1)) ?>
@@ -249,7 +255,7 @@ require_once '../partials/header.php';
                                 <div class="flex items-center gap-4 p-4 rounded-xl border border-gray-100 hover:border-primary/30 hover:shadow-sm transition-all bg-white group">
                                     <div class="w-16 h-16 bg-gray-50 rounded-lg flex items-center justify-center p-2 border border-gray-100 flex-shrink-0">
                                         <?php if ($order['first_product_image']): ?>
-                                            <img src="<?= SITE_URL ?>/images/<?= sanitize($order['first_product_image']) ?>" class="w-full h-full object-contain" alt="Product" onerror="this.src='https://via.placeholder.com/60?text=Order'">
+                                            <img src="<?= SITE_URL ?>/assets/img/<?= sanitize($order['first_product_image']) ?>" class="w-full h-full object-contain" alt="Product" onerror="this.src='https://via.placeholder.com/60?text=Order'">
                                         <?php else: ?>
                                             <i class="fas fa-box text-gray-300 text-2xl"></i>
                                         <?php endif; ?>
@@ -310,7 +316,7 @@ require_once '../partials/header.php';
                                     <div class="flex gap-4">
                                         <div class="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center flex-shrink-0 border border-gray-100">
                                             <?php if ($review['target_image']): ?>
-                                                <img src="<?= SITE_URL ?>/images/<?= sanitize($review['target_image']) ?>" class="w-10 h-10 object-contain rounded" alt="Item">
+                                                <img src="<?= SITE_URL ?>/assets/img/<?= sanitize($review['target_image']) ?>" class="w-10 h-10 object-contain rounded" alt="Item">
                                             <?php else: ?>
                                                 <i class="fas <?= $review['review_type'] === 'Product' ? 'fa-box' : 'fa-spa' ?> text-gray-400"></i>
                                             <?php endif; ?>
@@ -469,5 +475,5 @@ if (settingsBtn && settingsDrop) {
 }
 </script>
 
-<?php require_once '../partials/footer.php'; ?>
+<?php require_once '../Includes/Partials/footer.php'; ?>
 

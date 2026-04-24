@@ -105,7 +105,7 @@ if (isLoggedIn()) {
                 </div>
 
                 <div class="mb-8 flex justify-end">
-                    <a href="#" class="text-[12px] font-bold text-[#20456c] hover:text-[#112A46] transition-colors pr-1">Forgot password?</a>
+                    <a href="<?= SITE_URL ?>/forgot-password.php" class="text-[12px] font-bold text-[#20456c] hover:text-[#112A46] transition-colors pr-1">Forgot password?</a>
                 </div>
 
                 <button type="submit" class="w-full py-4 bg-[#20456c] text-white rounded-[18px] text-[16px] font-[700] tracking-wide hover:bg-[#112842] hover:shadow-lg transition-all shadow-md">
@@ -134,9 +134,15 @@ if (isLoggedIn()) {
 
                 <!-- Step 2 -->
                 <div class="step step-2 hidden">
-                    <div class="mb-8">
+                    <div class="mb-4">
                         <label class="block text-[13px] font-[700] text-[#1a375e] mb-2 px-1">Email</label>
                         <input type="email" name="email" placeholder="your@email.com" required
+                            class="w-full px-5 py-[14px] bg-[#f0f2f6] border-none rounded-[14px] text-[14px] font-medium text-gray-900 focus:ring-2 focus:ring-[#20456c] outline-none transition-all placeholder-gray-400">
+                    </div>
+
+                    <div class="mb-8">
+                        <label class="block text-[13px] font-[700] text-[#1a375e] mb-2 px-1">Phone Number</label>
+                        <input type="tel" name="phone" placeholder="e.g. 9812345678" required pattern="^9\d{9}$" maxlength="10" title="Phone number must start with 9 and be exactly 10 digits"
                             class="w-full px-5 py-[14px] bg-[#f0f2f6] border-none rounded-[14px] text-[14px] font-medium text-gray-900 focus:ring-2 focus:ring-[#20456c] outline-none transition-all placeholder-gray-400">
                     </div>
                 </div>
@@ -219,11 +225,12 @@ if (isLoggedIn()) {
             }
         }
 
-        nextBtn.addEventListener('click', () => {
+        nextBtn.addEventListener('click', async () => {
             // Validate current step inputs before moving forward
             const currentInputs = steps[currentStep].querySelectorAll('input[required]');
             let valid = true;
-            currentInputs.forEach(input => {
+            
+            for (let input of currentInputs) {
                 // Clear custom validity first to allow native checks
                 input.setCustomValidity('');
 
@@ -234,11 +241,33 @@ if (isLoggedIn()) {
                     }
                 }
 
+                // Custom Phone validation
+                if (input.name === 'phone' && input.value) {
+                    if (!/^9\d{9}$/.test(input.value)) {
+                        input.setCustomValidity('Phone number must start with 9 and be exactly 10 digits.');
+                    }
+                }
+
+                // Custom Username validation explicitly for Signup
+                if (input.name === 'username' && input.value && input.closest('#signupForm')) {
+                    const fd = new FormData();
+                    fd.append('username', input.value.trim());
+                    try {
+                        // Use SITE_URL safely inside JS block
+                        const apiUrl = "<?= SITE_URL ?>/api/check-username.php";
+                        const res = await fetch(apiUrl, { method: 'POST', body: fd });
+                        const data = await res.json();
+                        if (data.exists) {
+                            input.setCustomValidity('Username is already taken. Please choose another.');
+                        }
+                    } catch(e) {}
+                }
+
                 if (!input.checkValidity()) {
                     input.reportValidity();
                     valid = false;
                 }
-            });
+            }
 
             if (valid) {
                 currentStep++;

@@ -7,12 +7,12 @@ require_once dirname(__DIR__) . '/config/config.php';
 
 // Handle save
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $fields = ['site_name', 'site_tagline', 'site_email', 'site_phone', 'site_address', 'opening_time', 'closing_time', 'payment_cod', 'payment_esewa', 'payment_khalti'];
+    $fields = ['site_name', 'site_tagline', 'site_email', 'site_phone', 'site_address', 'opening_time', 'closing_time', 'payment_cod', 'payment_esewa'];
     $stmt = $pdo->prepare("INSERT INTO settings (setting_key, setting_value) VALUES (?, ?) ON DUPLICATE KEY UPDATE setting_value = VALUES(setting_value)");
     foreach ($fields as $key) {
         $value = $_POST[$key] ?? '';
         // Checkboxes - set to 1 if present, 0 if not
-        if (in_array($key, ['payment_cod', 'payment_esewa', 'payment_khalti'])) {
+        if (in_array($key, ['payment_cod', 'payment_esewa'])) {
             $value = isset($_POST[$key]) ? '1' : '0';
         }
         $stmt->execute([$key, $value]);
@@ -88,25 +88,19 @@ require_once 'header.php';
                 <div class="space-y-3">
                     <label class="flex items-center justify-between p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors">
                         <div class="flex items-center gap-3">
-                            <i class="fas fa-money-bill-wave text-green-500 w-5"></i>
+                            <img src="<?= SITE_URL ?>/images/cod-icon.png" alt="COD" class="w-6 h-6 object-contain rounded-md shadow-sm">
                             <span class="text-sm font-medium text-gray-700">Cash on Delivery</span>
                         </div>
                         <input type="checkbox" name="payment_cod" class="accent-primary w-4 h-4" <?= get_site_setting('payment_cod', '1') === '1' ? 'checked' : '' ?>>
                     </label>
                     <label class="flex items-center justify-between p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors">
                         <div class="flex items-center gap-3">
-                            <i class="fas fa-mobile-alt text-green-600 w-5"></i>
+                            <img src="<?= SITE_URL ?>/images/esewa-logo.png" alt="eSewa" class="w-6 h-6 object-contain rounded-md shadow-sm">
                             <span class="text-sm font-medium text-gray-700">eSewa</span>
                         </div>
                         <input type="checkbox" name="payment_esewa" class="accent-primary w-4 h-4" <?= get_site_setting('payment_esewa', '0') === '1' ? 'checked' : '' ?>>
                     </label>
-                    <label class="flex items-center justify-between p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors">
-                        <div class="flex items-center gap-3">
-                            <i class="fas fa-wallet text-purple-500 w-5"></i>
-                            <span class="text-sm font-medium text-gray-700">Khalti</span>
-                        </div>
-                        <input type="checkbox" name="payment_khalti" class="accent-primary w-4 h-4" <?= get_site_setting('payment_khalti', '0') === '1' ? 'checked' : '' ?>>
-                    </label>
+
                 </div>
             </div>
         </div>

@@ -3,7 +3,7 @@
  * Admin - Manage Bookings (Enhanced with staff assignment & filters)
  */
 $pageTitle = 'Manage Bookings';
-require_once dirname(__DIR__) . '/config/config.php';
+require_once dirname(__DIR__) . '/app/Config/config.php';
 
 // Handle actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -13,12 +13,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $newStatus = $_POST['new_status'];
         $allowed = ['Pending', 'Confirmed', 'Completed', 'Cancelled', 'No Show'];
         if (in_array($newStatus, $allowed)) {
-            // Map status to outcome for scoring engine
-            $outcomeMap = ['Completed' => 'completed', 'Cancelled' => 'cancelled', 'No Show' => 'no_show'];
-            $outcome = $outcomeMap[$newStatus] ?? null;
-            $stmt = $pdo->prepare("UPDATE bookings SET status = ?, outcome = ? WHERE id = ?");
-            $stmt->execute([$newStatus, $outcome, $bookingId]);
-            setFlash('success', 'Booking #' . $bookingId . ' updated to ' . $newStatus);
+            // Check if attempting to Complete ahead of schedule
+            $stmtDate = $pdo->prepare("SELECT booking_date FROM bookings WHERE id = ?");
+            $stmtDate->execute([$bookingId]);
+            $bDate = $stmtDate->fetchColumn();
+
+            if (($newStatus === 'Completed' || $newStatus === 'No Show') && strtotime($bDate) > strtotime(date('Y-m-d'))) {
+                setFlash('error', "Cannot mark as '$newStatus' ahead of the scheduled date.");
+            } else {
+                // Map status to outcome for scoring engine
+                $outcomeMap = ['Completed' => 'completed', 'Cancelled' => 'cancelled', 'No Show' => 'no_show'];
+                $outcome = $outcomeMap[$newStatus] ?? null;
+                $stmt = $pdo->prepare("UPDATE bookings SET status = ?, outcome = ? WHERE id = ?");
+                $stmt->execute([$newStatus, $outcome, $bookingId]);
+                setFlash('success', 'Booking #' . $bookingId . ' updated to ' . $newStatus);
+            }
         }
     } elseif ($action === 'assign_staff') {
         $bookingId = (int)$_POST['booking_id'];
@@ -29,6 +38,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     redirect(SITE_URL . '/admin/bookings.php?' . http_build_query($_GET));
 }
+
+// Auto-cleanup stale bookings where the date has passed
+// 'Confirmed' assumes they showed up -> 'Completed'
+$pdo->exec("UPDATE bookings SET status = 'Completed', outcome = 'completed' WHERE booking_date < CURDATE() AND status = 'Confirmed'");
+// 'Pending' assumes they never followed through -> 'No Show'
+$pdo->exec("UPDATE bookings SET status = 'No Show', outcome = 'no_show' WHERE booking_date < CURDATE() AND status = 'Pending'");
 
 // Filters
 $statusFilter = $_GET['status'] ?? '';
@@ -128,6 +143,7 @@ require_once 'header.php';
                             <input type="hidden" name="booking_id" value="<?= $b['id'] ?>">
                             <select name="new_status" class="text-xs border border-gray-200 rounded-lg px-2 py-1.5 bg-white focus:border-primary outline-none">
                                 <?php foreach (['Pending', 'Confirmed', 'Completed', 'Cancelled', 'No Show'] as $s): ?>
+                                    <?php if (($s === 'Completed' || $s === 'No Show') && strtotime($b['booking_date']) > strtotime(date('Y-m-d'))) continue; ?>
                                     <option value="<?= $s ?>" <?= $b['status'] === $s ? 'selected' : '' ?>><?= $s ?></option>
                                 <?php endforeach; ?>
                             </select>

@@ -2,7 +2,7 @@
 /**
  * Register API Handler - Urban Glow Salon
  */
-require_once dirname(__DIR__) . '/config/config.php';
+require_once dirname(__DIR__) . '/app/Config/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     redirect(SITE_URL . '/login.php');
@@ -30,6 +30,12 @@ if (empty($full_name) || empty($email) || empty($username) || empty($password)) 
 // Validate email
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     setFlash('error', 'Please enter a valid email address.');
+    redirect(SITE_URL . '/login.php');
+}
+
+// Validate phone number
+if (!empty($phone) && !preg_match('/^9\d{9}$/', $phone)) {
+    setFlash('error', 'Phone number must start with 9 and be exactly 10 digits.');
     redirect(SITE_URL . '/login.php');
 }
 
@@ -75,6 +81,10 @@ $user = [
     'full_name' => $full_name
 ];
 loginUser($user);
+
+// Send welcome email
+require_once CORE_PATH . '/mailer.php';
+sendWelcomeEmail($email, $full_name);
 
 setFlash('success', 'Account created successfully! Welcome, ' . $full_name . '!');
 redirect(SITE_URL . '/index.php');

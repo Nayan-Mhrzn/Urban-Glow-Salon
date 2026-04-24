@@ -6,7 +6,7 @@
  * GET params: date, service_id
  * Returns JSON: { slots, recommended, fully_booked, high_risk }
  */
-require_once dirname(__DIR__) . '/config/config.php';
+require_once dirname(__DIR__) . '/app/Config/config.php';
 require_once dirname(__DIR__) . '/core/slot_scorer.php';
 
 header('Content-Type: application/json');
@@ -20,6 +20,7 @@ if (isLoggedIn()) {
 // ── Validate inputs ──
 $date = $_GET['date'] ?? '';
 $serviceId = (int) ($_GET['service_id'] ?? 0);
+$specialistId = !empty($_GET['specialist_id']) ? (int)$_GET['specialist_id'] : null;
 
 if (empty($date) || !$serviceId) {
     http_response_code(400);
@@ -55,6 +56,39 @@ if (!empty($result['slots'])) {
     $highRisk = $result['slots'][0]['high_risk'] ?? false;
 }
 
+// ── Get Specialists ──
+$staffStmt = $pdo->prepare("
+    SELECT u.id, u.full_name, u.profile_image 
+    FROM users u 
+    JOIN staff_services ss ON u.id = ss.staff_id 
+    WHERE ss.service_id = ? AND u.role = 'STAFF'
+");
+$staffStmt->execute([$serviceId]);
+$serviceStaff = $staffStmt->fetchAll();
+$staffMap = [];
+foreach($serviceStaff as $st) {
+    if (!$specialistId || $st['id'] == $specialistId) {
+        $staffMap[] = $st;
+    }
+}
+
+// ── Filter slots if a specific specialist is chosen ──
+// Find which slots the requested specialist is ALREADY booked for
+$busySlots = [];
+if ($specialistId) {
+    $busyStmt = $pdo->prepare("SELECT booking_time FROM bookings WHERE booking_date = ? AND staff_id = ? AND status != 'Cancelled'");
+    $busyStmt->execute([$date, $specialistId]);
+    $busySlots = $busyStmt->fetchAll(PDO::FETCH_COLUMN);
+    
+    // Filter the raw slots arrays
+    $result['slots'] = array_values(array_filter($result['slots'], function($s) use ($busySlots) {
+        return !in_array($s['time'], $busySlots);
+    }));
+    $result['recommended'] = array_values(array_filter($result['recommended'], function($s) use ($busySlots) {
+        return !in_array($s['time'], $busySlots);
+    }));
+}
+
 // ── Log scores to slot_score_logs ──
 if ($customerId && !empty($result['slots'])) {
     $logStmt = $pdo->prepare(
@@ -87,14 +121,17 @@ if ($customerId && !empty($result['slots'])) {
     }
 }
 
-// ── Clean internal fields before sending to client ──
-$cleanSlot = function (array $slot): array {
+// ── Clean internal fields and inject specialist ──
+$cleanSlot = function (array $slot) use ($staffMap): array {
+    $sp = !empty($staffMap) ? $staffMap[array_rand($staffMap)] : null; // assign random valid specialist
+    
     return [
         'time'           => $slot['time'],
         'display'        => $slot['display'],
         'available'      => $slot['available'],
         'final_score'    => $slot['final_score'],
         'is_recommended' => $slot['is_recommended'],
+        'specialist'     => $sp
     ];
 };
 

@@ -3,7 +3,7 @@
  * Staff - My Appointments
  */
 $pageTitle = 'My Appointments';
-require_once dirname(__DIR__) . '/config/config.php';
+require_once dirname(__DIR__) . '/app/Config/config.php';
 requireStaff();
 
 // Handle status updates
@@ -16,17 +16,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         if (in_array($newStatus, $allowed)) {
             // Ensure this booking actually belongs to the logged-in staff
-            $checkStmt = $pdo->prepare("SELECT id FROM bookings WHERE id = ? AND staff_id = ?");
+            $checkStmt = $pdo->prepare("SELECT id, booking_date FROM bookings WHERE id = ? AND staff_id = ?");
             $checkStmt->execute([$bookingId, $_SESSION['user_id']]);
+            $bData = $checkStmt->fetch();
             
-            if ($checkStmt->fetch()) {
-                // Map status to outcome for scoring engine
-                $outcomeMap = ['Completed' => 'completed', 'Cancelled' => 'cancelled', 'No Show' => 'no_show'];
-                $outcome = $outcomeMap[$newStatus] ?? null;
-                
-                $stmt = $pdo->prepare("UPDATE bookings SET status = ?, outcome = ? WHERE id = ?");
-                $stmt->execute([$newStatus, $outcome, $bookingId]);
-                setFlash('success', 'Booking #' . $bookingId . ' updated to ' . $newStatus);
+            if ($bData) {
+                if (($newStatus === 'Completed' || $newStatus === 'No Show') && strtotime($bData['booking_date']) > strtotime(date('Y-m-d'))) {
+                    setFlash('error', "Cannot mark as '$newStatus' ahead of the scheduled date.");
+                } else {
+                    // Map status to outcome for scoring engine
+                    $outcomeMap = ['Completed' => 'completed', 'Cancelled' => 'cancelled', 'No Show' => 'no_show'];
+                    $outcome = $outcomeMap[$newStatus] ?? null;
+                    
+                    $stmt = $pdo->prepare("UPDATE bookings SET status = ?, outcome = ? WHERE id = ?");
+                    $stmt->execute([$newStatus, $outcome, $bookingId]);
+                    setFlash('success', 'Booking #' . $bookingId . ' updated to ' . $newStatus);
+                }
             } else {
                 setFlash('error', 'Unauthorized or invalid booking.');
             }
@@ -34,6 +39,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     redirect(SITE_URL . '/staff/appointments.php?' . http_build_query($_GET));
 }
+
+// Auto-cleanup stale bookings where the date has passed
+// 'Confirmed' assumes they showed up -> 'Completed'
+$pdo->exec("UPDATE bookings SET status = 'Completed', outcome = 'completed' WHERE booking_date < CURDATE() AND status = 'Confirmed'");
+// 'Pending' assumes they never followed through -> 'No Show'
+$pdo->exec("UPDATE bookings SET status = 'No Show', outcome = 'no_show' WHERE booking_date < CURDATE() AND status = 'Pending'");
 
 // Filters
 $statusFilter = $_GET['status'] ?? '';
@@ -136,6 +147,7 @@ require_once 'header.php';
                             <input type="hidden" name="booking_id" value="<?= $b['id'] ?>">
                             <select name="new_status" class="text-sm font-medium border border-gray-200 rounded-lg px-3 py-2 bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none cursor-pointer">
                                 <?php foreach (['Pending', 'Confirmed', 'Completed', 'Cancelled', 'No Show'] as $s): ?>
+                                    <?php if (($s === 'Completed' || $s === 'No Show') && strtotime($b['booking_date']) > strtotime(date('Y-m-d'))) continue; ?>
                                     <option value="<?= $s ?>" <?= $b['status'] === $s ? 'selected' : '' ?>><?= $s ?></option>
                                 <?php endforeach; ?>
                             </select>

@@ -2,7 +2,7 @@
 /**
  * Add to Cart API - Urban Glow Salon
  */
-require_once dirname(__DIR__) . '/config/config.php';
+require_once dirname(__DIR__) . '/app/Config/config.php';
 
 header('Content-Type: application/json');
 

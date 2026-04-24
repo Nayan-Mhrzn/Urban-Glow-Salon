@@ -3,7 +3,7 @@
  * Profile Settings Page - Urban Glow Salon
  */
 $pageTitle = 'Profile Settings';
-require_once '../config/config.php';
+require_once '../app/Config/config.php';
 
 requireLogin();
 
@@ -35,6 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (empty($fullName)) {
             setFlash('error', 'Full Name is required.');
+        } elseif (!empty($phone) && !preg_match('/^9\d{9}$/', $phone)) {
+            setFlash('error', 'Phone number must start with 9 and be exactly 10 digits.');
         } else {
             $stmt = $pdo->prepare("UPDATE users SET full_name = ?, phone = ? WHERE id = ?");
             if ($stmt->execute([$fullName, $phone, $userId])) {
@@ -74,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-require_once '../partials/header.php';
+require_once '../Includes/Partials/header.php';
 ?>
 
 <div class="bg-gray-50 min-h-[calc(100vh-80px)] py-12">
@@ -122,7 +124,7 @@ require_once '../partials/header.php';
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-gray-700 mb-2">Phone Number</label>
-                            <input type="tel" name="phone" value="<?= sanitize($user['phone'] ?? '') ?>" placeholder="e.g. 9812345678" class="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl text-sm font-medium focus:border-primary outline-none transition-all shadow-sm">
+                            <input type="tel" name="phone" value="<?= sanitize($user['phone'] ?? '') ?>" placeholder="e.g. 9812345678" pattern="^9\d{9}$" maxlength="10" title="Phone number must start with 9 and be exactly 10 digits" class="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl text-sm font-medium focus:border-primary outline-none transition-all shadow-sm">
                         </div>
                     </div>
 
@@ -172,4 +174,4 @@ require_once '../partials/header.php';
     </div>
 </div>
 
-<?php require_once '../partials/footer.php'; ?>
+<?php require_once '../Includes/Partials/footer.php'; ?>

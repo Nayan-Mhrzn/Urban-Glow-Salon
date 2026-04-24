@@ -3,7 +3,7 @@
  * Home Page - Urban Glow Salon
  */
 $pageTitle = 'Home';
-require_once 'config/config.php';
+require_once 'app/Config/config.php';
 
 // Fetch featured products (newest 4)
 $stmt = $pdo->query("SELECT * FROM products WHERE is_active = 1 ORDER BY created_at DESC LIMIT 4");
@@ -49,7 +49,7 @@ require_once 'partials/header.php';
                 <a href="shop/products.php" class="bg-[#4f46e5] hover:bg-[#4338ca] text-white font-bold px-10 py-4 rounded-full transition-all hover:-translate-y-1 hover:shadow-lg text-[17px] inline-flex items-center justify-center gap-2">
                     Shop Now
                 </a>
-                <a href="booking/book-appointment.php" class="bg-white hover:bg-[#EEF0FF] text-[#4f46e5] font-bold px-10 py-4 rounded-full border-[2px] border-[#4f46e5] transition-all hover:-translate-y-1 hover:shadow-lg text-[17px] inline-flex items-center justify-center gap-2">
+                <a href="booking/services.php" class="bg-white hover:bg-[#EEF0FF] text-[#4f46e5] font-bold px-10 py-4 rounded-full border-[2px] border-[#4f46e5] transition-all hover:-translate-y-1 hover:shadow-lg text-[17px] inline-flex items-center justify-center gap-2">
                     Book Now
                 </a>
             </div>
@@ -103,7 +103,7 @@ require_once 'partials/header.php';
                         <button onclick="addToCart(<?= $product['id'] ?>)" class="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold border-2 border-gray-200 rounded-full text-gray-700 hover:border-primary hover:text-primary transition-all">
                             <i class="fas fa-cart-plus"></i> Cart
                         </button>
-                        <a href="product-details.php?id=<?= $product['id'] ?>" class="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold bg-primary text-white rounded-full hover:bg-primary-dark transition-all">
+                        <a href="shop/product-details.php?id=<?= encodeProductId($product['id']) ?>" class="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold bg-primary text-white rounded-full hover:bg-primary-dark transition-all">
                             <i class="fas fa-shopping-bag"></i> Buy
                         </a>
                     </div>
@@ -148,13 +148,18 @@ require_once 'partials/header.php';
                 <span class="absolute top-4 left-4 z-10 <?= $badgeColor ?> text-white text-xs font-semibold px-3 py-1 rounded-md"><?= $service['category'] ?></span>
 
                 <!-- Service Image -->
-                <div class="h-48 bg-gray-100 overflow-hidden">
-                    <img src="<?= SITE_URL ?>/images/<?= $service['image'] ?>" alt="<?= sanitize($service['name']) ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/400x200?text=<?= urlencode($service['name']) ?>'">
-                </div>
+                <a href="booking/service-details.php?id=<?= $service['id'] ?>" class="block aspect-video bg-gray-100 overflow-hidden relative">
+                    <img src="<?= SITE_URL ?>/images/<?= $service['image'] ?>" alt="<?= sanitize($service['name']) ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out" onerror="this.src='https://via.placeholder.com/600x400?text=<?= urlencode($service['name']) ?>'">
+                    <div class="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </a>
 
                 <!-- Service Info -->
-                <div class="p-5">
-                    <h3 class="font-semibold text-gray-900 text-lg mb-1"><?= sanitize($service['name']) ?></h3>
+                <div class="p-5 flex flex-col justify-between flex-1">
+                    <h3 class="font-bold text-gray-900 text-lg mb-1 leading-tight group-hover:text-primary transition-colors">
+                        <a href="booking/service-details.php?id=<?= $service['id'] ?>" class="outline-none focus:ring-0">
+                            <?= sanitize($service['name']) ?>
+                        </a>
+                    </h3>
                     <p class="text-xl font-bold text-primary mb-2"><?= formatPrice($service['price']) ?></p>
                     <p class="text-sm text-gray-500 mb-3"><?= sanitize(truncateText($service['description'], 80)) ?></p>
                     <div class="flex items-center gap-4 text-xs text-gray-500">
@@ -279,7 +284,7 @@ require_once 'partials/header.php';
             <h2 class="text-3xl md:text-4xl font-bold mb-4 relative z-10">Ready for a Fresh Look?</h2>
             <p class="text-lg text-white/80 mb-8 max-w-lg mx-auto relative z-10">Book your appointment today and experience premium grooming at Urban Glow Salon.</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
-                <a href="booking/book-appointment.php" class="bg-white text-primary font-semibold px-8 py-3.5 rounded-full hover:-translate-y-1 hover:shadow-xl transition-all text-sm inline-flex items-center justify-center gap-2">
+                <a href="booking/services.php" class="bg-white text-primary font-semibold px-8 py-3.5 rounded-full hover:-translate-y-1 hover:shadow-xl transition-all text-sm inline-flex items-center justify-center gap-2">
                     <i class="fas fa-calendar-alt"></i> Book Appointment
                 </a>
                 <a href="booking/services.php" class="bg-transparent text-white font-semibold px-8 py-3.5 rounded-full border-2 border-white/50 hover:bg-white/10 hover:-translate-y-1 transition-all text-sm inline-flex items-center justify-center gap-2">
